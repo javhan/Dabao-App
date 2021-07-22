@@ -1,5 +1,7 @@
-Dabao
-User Schema
+# Dabao
+
+## User Schema
+```
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
@@ -8,7 +10,9 @@ const userSchema = new mongoose.Schema({
   hp: {type: Number, required: true},
 
 });
-Daboa-er Schema
+```
+## Daboa-er Schema
+```
 const daboa-er = new mongoose.Schema({
     username = { type: Schema.Types.ObjectId, ref: 'User' },
     pickupLocation = {type: Number, required: true }
@@ -17,25 +21,29 @@ const daboa-er = new mongoose.Schema({
     time = { type: Date, required: true }
     Max-Orders = Number 
 })
-
-Daboa-ee Schema
+```
+## Daboa-ee Schema
+```
 const dabao-ee = new mongoose.Schema({
     username = { type: Schema.Types.ObjectId, ref: 'User' },
     currentLocation = Number
     remarks = Array
 })
-
-Match Schema
+```
+## Match Schema
+```
 const matchSchema = new mongoose.Schema({
     dabao-er-username: { type: ObjectId, ref: 'User' },
     dabao-ee-username: { type: ObjectId, ref: 'User' },
     daboa-details : { type: ObjectId, ref: 'Daboa-er' }
 });
-
-Stalls Schema
+```
+## Stalls Schema
+```
 const stallSchema = new mongoose.Schema({
     name: { type: String, required: true } 
     location: { type: String, required: true }
-    poscode: { type: Numberm required: true }
+    poscode: { type: Number required: true }
     cuisine : Array
 });
+```
