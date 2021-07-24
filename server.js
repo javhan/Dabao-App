@@ -20,7 +20,7 @@ app.use(
   );
   app.use(express.urlencoded({ extended: false }));
   app.use(methodOverride("_method"));
-  app.use(express.static("./daboa/build"));
+  app.use(express.static("./dabao/build"));
 
   app.use(cors()) 
   app.use(express.json());
