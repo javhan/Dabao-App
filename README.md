@@ -3,47 +3,64 @@
 ## User Schema
 ```
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
+  username: { type: String, required: true, unique : true },
   password: { type: String, required: true },
-  address: { type: String, required: true},
-  poscode: { type: String, required: true},
-  hp: {type: Number, required: true},
-
+  address: { 
+      street : { type : String, required : true},
+      postCode : { type : Number, required : true }
+  },
+  contact : {
+      hp : { type : Number, required : true },
+      email : { type: String, required: true, unique : true }
+  }
+  isDabao : { type : String, default : DBee }
 });
-```
-## Daboa-er Schema
-```
-const daboa-er = new mongoose.Schema({
-    username = { type: Schema.Types.ObjectId, ref: 'User' },
-    pickupLocation = {type: Number, required: true }
-    dabaoLocation = { type: String, required: true }
-    cuisine_dish = { type: String, required: true}
-    time = { type: Date, required: true }
-    Max-Orders = Number 
-})
-```
-## Daboa-ee Schema
-```
-const dabao-ee = new mongoose.Schema({
-    username = { type: Schema.Types.ObjectId, ref: 'User' },
-    currentLocation = Number
-    remarks = Array
-})
 ```
 ## Match Schema
 ```
 const matchSchema = new mongoose.Schema({
-    dabao-er-username: { type: ObjectId, ref: 'User' },
-    dabao-ee-username: { type: ObjectId, ref: 'User' },
-    daboa-details : { type: ObjectId, ref: 'Daboa-er' }
+    timePosted : Date
+    DBER : { type: Schema.Types.ObjectId, ref: 'User' },
+    maxOrders: { type: Number, max : 2 }
+    Orders: [
+        {
+            DBEE : { type: Schema.Types.ObjectId, ref: 'User' },
+            isCompleted : Boolean,
+            remarks : String,
+            dishOrdered : { type: Schema.Types.ObjectId, ref: 'Amenity' },
+            messages : [
+                {
+                    message : String,
+                    user : { type: Schema.Types.ObjectId, ref: 'User' }
+                }
+            ]
+        }
+    ]
+    pickupLocation : { type: Schema.Types.ObjectId, ref: 'User' },
+    timeAtPickUp : Date,
+    orderLocation : { type: Schema.Types.ObjectId, ref: 'Amenity' }, 
+    isCompleted : Boolean
 });
 ```
-## Stalls Schema
+## Amenity Schema
 ```
-const stallSchema = new mongoose.Schema({
-    name: { type: String, required: true } 
-    location: { type: String, required: true }
-    poscode: { type: Number required: true }
-    cuisine : Array
+const shopSchema = new mongoose.Schema({
+    shop: [
+    {
+      street : { type : String, required : true},
+      postCode : { type : Number, required : true },
+      stores: [
+        {
+          name: { type : String, required : true, unique : true },
+          menu: [
+            {
+              itemName: { type : String, required : true},
+              itemPrice: { type : Number, required : true },
+            },
+          ],
+        },
+      ],
+    },
+  ],
 });
 ```
