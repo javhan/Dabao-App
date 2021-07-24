@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "install-client": "cd daboa && npm install",
-    "build": "cd daboa && npm run build",
+    "install-client": "cd dabao && npm install",
+    "build": "cd dabao && npm run build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build"
   },
   "repository": {
