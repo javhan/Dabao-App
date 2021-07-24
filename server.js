@@ -20,7 +20,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-app.use(express.static("public"));
+app.use(express.static("./dabao/build"));
 
 app.use(cors());
 app.use(express.json());
@@ -32,7 +32,7 @@ app.use("/users", usersController);
 const seed = require("./models/users.seed.js");
 const User = require("./models/users.model.js");
 const seedShop = require("./models/shop.seed.js");
-const Shop = require("./models/shop.model.js")
+const Shop = require("./models/shop.model.js");
 
 // Seed Routes - Use once to populate DB
 app.get("/seedUsers", (req, res) => {
@@ -52,10 +52,10 @@ app.get("/seedUsers", (req, res) => {
 app.get("/seedShops", (req, res) => {
   Shop.create(seedShop, (err, createdShops) => {
     if (err) {
-      res.status(400).json
+      res.status(400).json;
     }
-  })
-})
+  });
+});
 
 //Routes
 app.get("/", (req, res) => {
