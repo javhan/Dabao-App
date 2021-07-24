@@ -7,6 +7,11 @@
   overflow: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .navLeft {
   float: left;
   text-align: center;
