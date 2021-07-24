@@ -20,6 +20,13 @@ a {
   font-size: 17px;
 }
 
+.imgLeft {
+  float: left;
+  text-align: center;
+  padding: 16px;
+  height: 16px;
+}
+
 .navRight {
   float: right;
   text-align: center;

@@ -15,6 +15,7 @@ function App() {
   return (
     <div className="App">
       <div class="nav">
+        <img class="imgLeft" src="https://i.imgur.com/PKSYPMs.png"/>
         <a class="navLeft">DabaoPls</a>
         <a class="navRight">Login</a>
         <a class="navRight">
