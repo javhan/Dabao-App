@@ -27,10 +27,11 @@ const matchSchema = new mongoose.Schema({
             DBEE : { type: Schema.Types.ObjectId, ref: 'User' },
             isCompleted : Boolean,
             remarks : String,
-            dishOrdered : { type: Schema.Types.ObjectId, ref: 'Amenity' },
+            dishOrdered : { type: Schema.Types.ObjectId, ref: 'Shop' },
             messages : [
                 {
                     message : String,
+                    timePosted : Date,
                     user : { type: Schema.Types.ObjectId, ref: 'User' }
                 }
             ]
@@ -38,8 +39,7 @@ const matchSchema = new mongoose.Schema({
     ]
     pickupLocation : { type: Schema.Types.ObjectId, ref: 'User' },
     timeAtPickUp : Date,
-    orderLocation : { type: Schema.Types.ObjectId, ref: 'Amenity' }, 
-    isCompleted : Boolean
+    orderLocation : { type: Schema.Types.ObjectId, ref: 'Shop' }, 
 });
 ```
 ## Amenity Schema
