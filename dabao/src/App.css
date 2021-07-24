@@ -2,37 +2,52 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav {
+  background-color: #f9c906;
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navLeft {
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navRight {
+  float: right;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 17px;
 }
 
-.App-link {
-  color: #61dafb;
+.navRight:hover {
+  background-color: #f8efe4;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+label {
+  display: block;
+}
+
+.SignInForm {
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+  margin: auto;
+  padding: 40px 0px 0px;
+  box-shadow: 5px 5px #8888;
+  border-radius: 25px;
+}
+
+.SignUpForm {
+  width: 300px;
+  height: 200px;
+  border: 1px solid black;
+  margin: auto;
+  padding: 20px 0px 20px;
+  box-shadow: 5px 5px #8888;
+  border-radius: 25px;
 }
