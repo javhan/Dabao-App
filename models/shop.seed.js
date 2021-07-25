@@ -1,4 +1,4 @@
-const { getMaxListeners } = require("./users.model");
+const { getMaxListeners } = require("./shop.model");
 
 const seedShop = [
   {
@@ -70,7 +70,7 @@ const seedShop = [
             itemPrice: 4.2,
           },
         ],
-      },
+      }
     ],
   },
   {
