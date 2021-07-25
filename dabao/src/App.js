@@ -8,6 +8,8 @@ import LogOut from "./components/LogOut";
 import {render} from "react-dom"
 import { Route, Link, Switch, Redirect } from 'react-router-dom'
 import Dashboard from "./components/Dashboard"
+import Question from "./components/Question"
+import Board from "./components/Board"
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/new" component={SignUp}/>
           <Route path="/logout" component={LogOut}/>
           <Route path="/dashboard" component={Dashboard}/>
+          <Route path="/question" component={Question}/>
+          <Route path="/board" component={Board}/>
           <Redirect to="/" />
         </Switch>
       </main>

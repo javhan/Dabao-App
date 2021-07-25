@@ -10,7 +10,7 @@ const NavIn = (props) => {
     <div className="nav">
     <img className="imgLeft" alt="" src="https://i.imgur.com/PKSYPMs.png"/>
     <div className="navLeft">
-    <Link to="/">DabaoPls</Link>
+    <Link to="/home">DabaoPls</Link>
       </div>
     <div className="navRight">
       <Link to="/logout">Log Out</Link>
