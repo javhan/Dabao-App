@@ -28,11 +28,15 @@ app.use(express.json());
 // Controllers
 const usersController = require("./controllers/users.js");
 app.use("/users", usersController);
+const shopController = require("./controllers/shop.js");
+app.use("/shop", shopController);
 
 const seed = require("./models/users.seed.js");
 const User = require("./models/users.model.js");
 const seedShop = require("./models/shop.seed.js");
 const Shop = require("./models/shop.model.js");
+const seedMatch = require("./models/match.seed.js")
+const Match = require("./models/match.model.js")
 
 // Seed Routes - Use once to populate DB
 app.get("/seedUsers", (req, res) => {
@@ -52,8 +56,21 @@ app.get("/seedUsers", (req, res) => {
 app.get("/seedShops", (req, res) => {
   Shop.create(seedShop, (err, createdShops) => {
     if (err) {
-      res.status(400).json;
+      res.status(400).json({ error: err.message });
+    } else {
+      res.status(200).json(createdShops);
     }
+    console.log(createdShops);
+  });
+});
+app.get("/seedMatch", (req, res) => {
+  Match.create(seedMatch, (err, createdMatch) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } else {
+      res.status(200).json(createdMatch);
+    }
+    console.log(createdMatch);
   });
 });
 
