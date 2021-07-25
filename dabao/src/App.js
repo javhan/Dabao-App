@@ -9,20 +9,23 @@ import {
 } from "react-router-dom";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
-
+import Nav from "./Nav"
 
 function App() {
   return (
     <div className="App">
-      <div class="nav">
+      {/* <div class="nav">
         <img class="imgLeft" src="https://i.imgur.com/PKSYPMs.png"/>
-        <a class="navLeft">DabaoPls</a>
+        <a class="navLeft">
+        <Link to="/">DabaoPls</Link>
+          </a>
         <a class="navRight">Login</a>
         <a class="navRight">
           <Link to="/new">Sign Up</Link>
         </a>
-      </div>
-      <main>
+      </div> */}
+      <Nav />
+      {/* <main>
         <Switch>
           <Route exact path="/">
             <SignIn />
@@ -32,7 +35,7 @@ function App() {
           </Route>
           <Redirect to="/" />
         </Switch>
-      </main>
+      </main> */}
     </div>
   );
 }

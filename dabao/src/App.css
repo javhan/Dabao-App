@@ -40,6 +40,10 @@ a {
   background-color: #f8efe4;
 }
 
+.navLeft:hover {
+  background-color: #f8efe4;
+}
+
 label {
   display: block;
 }
