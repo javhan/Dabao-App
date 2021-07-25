@@ -1,9 +1,6 @@
 import { PromiseProvider } from "mongoose";
 import React from "react";
 import {
-    Redirect,
-    Switch,
-    Route,
     Link,
   } from "react-router-dom";
 
