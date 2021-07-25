@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 const Question = () =>{
     return(
         <NavIn>
-            <div>
+            <div className="box">
+                <h1>DBer Questionnaire</h1>
+            </div>
+              <div>
                 <Link to="/dashboard">
                 To Dashboard
                 </Link>
             </div>
-            <h1>DBer Questionnaire</h1>
         </NavIn>
     )
 }

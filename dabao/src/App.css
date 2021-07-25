@@ -83,3 +83,10 @@ padding: 50px;
 .flex-child:hover {
   background-color:#f9c906;
 }
+
+.box {
+  border: 1px solid black;
+  height: 400px;
+  width: 50%;
+  margin: 50px auto;
+}
