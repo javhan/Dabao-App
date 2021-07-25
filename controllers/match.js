@@ -26,54 +26,34 @@ router.get("/id/:id", (req, res) => {
   });
 });
 
-// Create a new user
-// curl -X POST -H "Content-Type: application/json" -d
-// '{"username":"TEST 123","password":"ga123"}' http://localhost:<PORT>/users
+// Create a new Match
 router.post("/", (req, res) => {
-  req.body.password = bcrypt.hashSync(
-    req.body.password,
-    bcrypt.genSaltSync(10)
-  );
-  User.create(req.body, (error, createdUser) => {
+  Match.create(req.body, (error, createdMatch) => {
     if (error) {
       res.status(400).json({ error: error.message });
     }
-    res.status(200).json(createdUser);
+    res.status(200).json(createdMatch);
   });
 });
 
-// Delete a user
-// curl -X DELETE http://localhost:<PORT>/users/<id>
+// Delete a Match
+// curl -X DELETE http://localhost:<PORT>/Match/<id>
 router.delete("/:id", (req, res) => {
-  User.findByIdAndRemove(req.params.id, (err, deletedUser) => {
+  Match.findByIdAndRemove(req.params.id, (err, deletedMatch) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
-    res.status(200).json(deletedUser);
+    res.status(200).json(deletedMatch);
   });
 });
 
-//* Update a user details except password
+//* Update a Match details 
 // curl -X PUT -H "Content-Type: application/json" -d
 // '{"usermame":"I updated this"}' http://localhost:<PORT>/users/<id>
-router.put("/:id", (req, res) => {
-  delete req.body.password;
-  User.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true },
-    (err, updatedUser) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-      }
-      res.status(200).json(updatedUser);
-    }
-  );
-});
 
 // Testing Route
 router.get("/new", (req, res) => {
-  res.send("USERS NEW PAGE");
+  res.send("MATCH NEW PAGE");
 });
 
 module.exports = router;
