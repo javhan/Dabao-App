@@ -1,3 +1,4 @@
+
 import "./App.css";
 import React from "react";
 import SignIn from "./components/SignIn";
@@ -10,9 +11,11 @@ import Question from "./components/Question";
 import Board from "./components/Board";
 import Profile from "./components/Profile";
 
+
 function App() {
   return (
     <div className="App">
+
       <main>
         <Switch>
           <Route exact path="/" component={SignIn} />
@@ -26,6 +29,7 @@ function App() {
           <Redirect to="/" />
         </Switch>
       </main>
+
     </div>
   );
 }
