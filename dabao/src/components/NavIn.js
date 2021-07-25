@@ -16,6 +16,9 @@ const NavIn = (props) => {
       <Link to="/logout">Log Out</Link>
     </div>
     <div className="navRight">
+      <Link to="/profile">Update Profile</Link>
+    </div>
+    <div className="navRight">
       <Link to="/dashboard">Dashboard</Link>
     </div>
   </div>

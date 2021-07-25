@@ -10,7 +10,7 @@ const Question = () =>{
                 To Dashboard
                 </Link>
             </div>
-            <h1>Question</h1>
+            <h1>DBer Questionnaire</h1>
         </NavIn>
     )
 }
