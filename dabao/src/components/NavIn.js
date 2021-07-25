@@ -15,6 +15,9 @@ const NavIn = (props) => {
     <div className="navRight">
       <Link to="/logout">Log Out</Link>
     </div>
+    <div className="navRight">
+      <Link to="/dashboard">Dashboard</Link>
+    </div>
   </div>
   <div>{props.children}</div>
   {/* <main>

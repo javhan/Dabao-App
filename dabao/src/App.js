@@ -7,7 +7,7 @@ import SignUp from "./components/SignUp"
 import LogOut from "./components/LogOut";
 import {render} from "react-dom"
 import { Route, Link, Switch, Redirect } from 'react-router-dom'
-
+import Dashboard from "./components/Dashboard"
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/home" component={HomePage}/>
           <Route path="/new" component={SignUp}/>
           <Route path="/logout" component={LogOut}/>
+          <Route path="/dashboard" component={Dashboard}/>
           <Redirect to="/" />
         </Switch>
       </main>
