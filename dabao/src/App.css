@@ -67,3 +67,12 @@ label {
   box-shadow: 5px 5px #8888;
   border-radius: 25px;
 }
+
+.flex{
+  display: flex
+}
+
+.flex-child{
+  flex: 1;
+  border: 1px solid black
+}

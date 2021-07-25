@@ -8,19 +8,24 @@ import {
   } from "react-router-dom";
   import SignUp from "./SignUp";
   import SignIn from "./SignIn";
+  import LogOut from "./LogOut"
 
 const Nav = () => {
   return (
       <>
-      <Router>
     <div class="nav">
     <img class="imgLeft" src="https://i.imgur.com/PKSYPMs.png"/>
     <a class="navLeft">
     <Link to="/">DabaoPls</Link>
       </a>
-    <a class="navRight">Login</a>
+    <a class="navRight">
+      <Link to="/">Login</Link>
+      </a>
     <a class="navRight">
       <Link to="/new">Sign Up</Link>
+    </a>
+    <a class="navRight">
+      <Link to="/logout">Log Out</Link>
     </a>
   </div>
   <main>
@@ -31,10 +36,12 @@ const Nav = () => {
       <Route path="/new">
         <SignUp />
       </Route>
-      <Redirect to="/" />
+      <Route path="/logout">
+        <LogOut />
+      </Route>
+      <Redirect to="/"/>
     </Switch>
   </main>
-  </Router>
   </>
   );
 };
