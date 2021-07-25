@@ -1,8 +1,8 @@
 import * as React from "react"
-
+import Nav from "./Nav"
 const SignIn = () => {
     return (
-        <>
+<Nav>
 <h1>Sign In!</h1>
 <div className="SignInForm">
 <form>
@@ -23,7 +23,7 @@ const SignIn = () => {
   </form>
 </form>
 </div>
-</>
+</Nav>
 )
 }   
 

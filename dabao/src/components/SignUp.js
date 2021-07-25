@@ -1,8 +1,8 @@
 import * as React from "react";
-
+import Nav from "./Nav"
 const SignUp = () => {
   return (
-      <>
+      <Nav>
       <h1>Sign Up!</h1>
     <div className="SignUpForm">
       <form>
@@ -34,7 +34,7 @@ const SignUp = () => {
         <input type="submit" value="Register" />
       </form>
     </div>
-    </>
+    </Nav>
   );
 };
 

@@ -1,8 +1,9 @@
 import * as React from "react"
-import Nav from "./Nav"
-const LogOut = () => {
+import NavIn from "./NavIn"
+
+const HomePage = () => {
     return (
-    <Nav>
+    <NavIn>
     <div className="flex">
     <div className="flex-child">
     <h1 className="DabaoLeft">Going Out To Dabao?</h1>
@@ -13,8 +14,8 @@ const LogOut = () => {
     <h1 className="DabaoRight">Too Busy To Head Out?</h1>
     </div>
     </div>
-    </Nav>
+    </NavIn>
     )
 }
 
-export default LogOut
+export default HomePage
