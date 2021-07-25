@@ -1,6 +1,6 @@
 import "./App.css";
-import Nav from "./components/Nav"
-import LogOut from "./components/LogOut"
+import Nav from "./components/Nav";
+import LogOut from "./components/LogOut";
 
 function App() {
   return (

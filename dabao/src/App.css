@@ -69,10 +69,14 @@ label {
 }
 
 .flex{
-  display: flex
+  display: flex;
+  height: 100vh;
 }
 
 .flex-child{
-  flex: 1;
-  border: 1px solid black
+flex: 1;
+border: 1px solid black;
+padding: 50px;
 }
+
+
