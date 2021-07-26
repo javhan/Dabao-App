@@ -21,7 +21,8 @@ sessions.post("/", (req, res) => {
         } else {
             if(bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser
-                res.send({ isLoggedIn: true })
+                console.log("Logged in!")
+                res.send(foundUser)
             } else {
                 res.send("password does not match")
             }
@@ -31,7 +32,7 @@ sessions.post("/", (req, res) => {
 
 sessions.delete("/", (req, res) => {
     req.session.destroy(() => {
-        res.redirect("/")
+        console.log("logged out")
     })
 })
 

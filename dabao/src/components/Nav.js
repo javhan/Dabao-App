@@ -1,24 +1,71 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { LoggedContext } from "../App.js";
+import { useHistory } from "react-router-dom";
 
 const Nav = (props) => {
-  return (
-    <>
-      <div className="nav">
-        <img className="imgLeft" alt="" src="https://i.imgur.com/PKSYPMs.png" />
-        <div className="navLeft">
-          <Link to="/home">DabaoPls</Link>
+  const loggedContext = useContext(LoggedContext);
+  const history = useHistory();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("http://localhost:4000/sessions", {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+    history.push("/")
+    loggedContext.setLogState()
+  };
+
+  if (!loggedContext.logState) {
+    return (
+      <>
+        <div className="nav">
+          <img
+            className="imgLeft"
+            alt=""
+            src="https://i.imgur.com/PKSYPMs.png"
+          />
+          <div className="navLeft">
+            <Link to="/home">DabaoPls</Link>
+          </div>
+          <div className="navRight">
+            <Link to="/">Login</Link>
+          </div>
+          <div className="navRight">
+            <Link to="/new">Sign Up</Link>
+          </div>
         </div>
-        <div className="navRight">
-          <Link to="/">Login</Link>
+        <div>{props.children}</div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="nav">
+          <img
+            className="imgLeft"
+            alt=""
+            src="https://i.imgur.com/PKSYPMs.png"
+          />
+          <div className="navLeft">
+            <Link to="/home">DabaoPls</Link>
+          </div>
+          <div className="navRight" onClick={handleSubmit}>
+            Log Out
+          </div>
+          <div className="navRight">
+            <Link to="/profile">Update Profile</Link>
+          </div>
+          <div className="navRight">
+            <Link to="/dashboard">Dashboard</Link>
+          </div>
         </div>
-        <div className="navRight">
-          <Link to="/new">Sign Up</Link>
-        </div>
-      </div>
-      <div>{props.children}</div>
-    </>
-  );
-};
+        <div>{props.children}</div>
+      </>
+    );
+  }
+}
 
 export default Nav;
