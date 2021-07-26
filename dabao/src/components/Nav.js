@@ -8,7 +8,7 @@ const Nav = (props) => {
   const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:4000/sessions", {
+    fetch("/sessions", {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

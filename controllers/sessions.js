@@ -6,8 +6,8 @@ const methodOverride = require("method-override")
 
 sessions.use(methodOverride("_method"))
 
-sessions.get("/new", (req, res) => {
-    res.send("testing sign up/login")
+sessions.get("/", (req, res) => {
+    res.send(req.session.user)
 })
 
 //POST for logging in
