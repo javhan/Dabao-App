@@ -8,6 +8,7 @@ sessions.use(methodOverride("_method"))
 
 sessions.get("/", (req, res) => {
     res.send(req.session.currentUser)
+
 })
 
 //POST for logging in

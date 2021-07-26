@@ -1,9 +1,10 @@
-import React from "react";
-import Nav from "./Nav";
+import React from "react"
+import Nav from "./Nav"
+
 import { Link } from "react-router-dom";
 
 const Question = () => {
-  const history = useHistory();
+    const history = useHistory();
   const handleSubmit = (event) => {
     fetch("/match", {
       method: "POST",
@@ -18,50 +19,62 @@ const Question = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.ok) {
-        res.json();
-      }
-    });
-    history.push("/dashboard");
+    })
+      .then((res) => {
+        if (res.ok) {
+          res.json();
+        }
+      });
+    history.push("/dashboard")
   };
   return (
     <Nav>
       <div className="box">
         <h1>DBer Questionnaire</h1>
         <form onSubmit={handleSubmit}>
+            <fieldset>
+        <legend>Where are you DB-ing?</legend>
+          <input
+            type="text"
+            name="street"
+          />
+           </fieldset>
+          <br/>
           <fieldset>
-            <legend>Where are you DB-ing?</legend>
-            <input type="text" name="street" />
+        <legend>Postal Code of DB place</legend>
+          <input
+            type="text"
+            name="postCodeOrder"/>
           </fieldset>
-          <br />
+          <br/>
           <fieldset>
-            <legend>Postal Code of DB place</legend>
-            <input type="text" name="postCodeOrder" />
+        <legend>Pick-Up Location</legend>
+          <input
+            type="text"
+            name="postCodePickUp"
+            placeholder="Postal Code"
+          />
           </fieldset>
-          <br />
+          <br/>
           <fieldset>
-            <legend>Pick-Up Location</legend>
-            <input
-              type="text"
-              name="postCodePickUp"
-              placeholder="Postal Code"
-            />
+        <legend>Pick-Up Time!</legend>
+          <input
+            type="datetime-local"
+            name="timeAtPickUp"
+          />
           </fieldset>
-          <br />
+          <br/>
           <fieldset>
-            <legend>Pick-Up Time!</legend>
-            <input type="datetime-local" name="timeAtPickUp" />
+        <legend>No. of Orders</legend>
+          <select
+            type="range"
+            name="maxOrders"
+          >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        </select>
           </fieldset>
-          <br />
-          <fieldset>
-            <legend>No. of Orders</legend>
-            <select type="range" name="maxOrders">
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-          </fieldset>
-          <br />
+          <br/>
           <input type="submit" value="Confirm!" />
         </form>
       </div>
