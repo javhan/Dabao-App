@@ -1,9 +1,5 @@
 import React from "react";
-import { Redirect, Switch, Route, Link } from "react-router-dom";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import LogOut from "./LogOut";
-import HomePage from "./HomePage";
+import { Link } from "react-router-dom";
 
 const Nav = (props) => {
   return (
@@ -21,23 +17,6 @@ const Nav = (props) => {
         </div>
       </div>
       <div>{props.children}</div>
-      {/* <main>
-        <Switch>
-          <Route exact path="/">
-            <SignIn />
-          </Route>
-          <Route path="/test">
-            <HomePage />
-          </Route>
-          <Route path="/new">
-            <SignUp />
-          </Route>
-          <Route path="/logout">
-            <LogOut />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </main> */}
     </>
   );
 };
