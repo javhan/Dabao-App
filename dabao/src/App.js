@@ -21,6 +21,10 @@ function App() {
 
   const onOff = { logState, setLogState };
 
+useEffect(()=> {
+  fetch("/")
+}, [])
+
   return (
     <div className="App">
       <LoggedContext.Provider value={onOff}>
