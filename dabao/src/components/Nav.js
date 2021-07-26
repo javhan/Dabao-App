@@ -1,10 +1,22 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoggedContext } from "../App.js";
+import { useHistory } from "react-router-dom";
 
 const Nav = (props) => {
   const loggedContext = useContext(LoggedContext);
-  console.log(loggedContext.logState)
+  const history = useHistory();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("http://localhost:4000/sessions", {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    history.push("/");
+    loggedContext.setLogState();
+  };
 
   if (!loggedContext.logState) {
     return (
@@ -40,8 +52,8 @@ const Nav = (props) => {
           <div className="navLeft">
             <Link to="/home">DabaoPls</Link>
           </div>
-          <div className="navRight">
-            <Link to="/logout">Log Out</Link>
+          <div className="navRight" onClick={handleSubmit}>
+            Log Out
           </div>
           <div className="navRight">
             <Link to="/profile">Update Profile</Link>
@@ -54,6 +66,6 @@ const Nav = (props) => {
       </>
     );
   }
-}
+};
 
 export default Nav;

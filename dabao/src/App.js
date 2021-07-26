@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
 import Board from "./components/Board";
 import Profile from "./components/Profile";
+import SignUpSuccess from "./components/SignUpSuccess";
 
 export const LoggedContext = createContext();
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/question" component={Question} />
             <Route path="/board" component={Board} />
             <Route path="/profile" component={Profile} />
+            <Route path="/signupsuccess" component={SignUpSuccess} />
             <Redirect to="/" />
           </Switch>
         </main>
