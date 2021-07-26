@@ -1,12 +1,13 @@
 import * as React from "react";
 import Nav from "./Nav";
+import { Link } from "react-router-dom"
 
 const HomePage = () => {
   return (
     <Nav>
       <div className="flex">
-        <a href="/question" className="flex-child">
-          <div>
+        <Link to="/question" className="flex-child">
+          <div className="flex=child">
             <h1 className="DabaoLeft">Going Out To Dabao?</h1>
             <img
               className="icon"
@@ -14,9 +15,9 @@ const HomePage = () => {
               src="https://i.imgur.com/jOQsDlZ.png"
             />
           </div>
-        </a>
-        <a href="/board" className="flex-child">
-          <div>
+        </Link>
+        <Link to="/board" className="flex-child">
+          <div className="flex=child">
             <img
               className="icon"
               alt=""
@@ -24,7 +25,7 @@ const HomePage = () => {
             />
             <h1 className="DabaoRight">Too Busy To Head Out?</h1>
           </div>
-        </a>
+        </Link>
       </div>
     </Nav>
   );
