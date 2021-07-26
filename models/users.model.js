@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
       email : { type: String, required: true, unique : true }
   },
   isDabao : { type : String, default : "DBee" }
-});
+},{ timestamps:true });
 
 const User = mongoose.model("user", userSchema);
 

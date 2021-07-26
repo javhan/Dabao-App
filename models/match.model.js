@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
+
 const matchSchema = new mongoose.Schema({
-  timePosted: Date,
-  DBER: String,
+  DBER:  { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   maxOrders: { type: Number, max: 2 },
   Orders: [
     {
-      DBEE: String,
-      isCompleted: Boolean,
+      DBEE: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      isCompleted: {type: Boolean, default:false},
       remarks: String,
       dishOrdered: { itemName: String, itemPrice: Number },
       messages: [
@@ -22,7 +22,7 @@ const matchSchema = new mongoose.Schema({
   pickupLocation: { street: String, postCode: Number },
   timeAtPickUp: Date,
   orderLocation: { street: String, postCode: Number },
-});
+}, {timestamps: true});
 
 const Match = mongoose.model("Match", matchSchema);
 
