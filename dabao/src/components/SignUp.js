@@ -1,6 +1,7 @@
 import * as React from "react";
 import Nav from "./Nav"
-const SignUp = () => {
+const SignUp = (props) => {
+  console.log(props.data)
   return (
       <Nav>
       <h1>Sign Up!</h1>

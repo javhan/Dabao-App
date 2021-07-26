@@ -11,13 +11,18 @@ import Board from "./components/Board";
 import Profile from "./components/Profile";
 
 function App() {
+  const data = "hello"
   return (
     <div className="App">
       <main>
         <Switch>
-          <Route exact path="/" component={SignIn} />
+          <Route exact path="/">
+          <SignIn />
+          </Route>
           <Route path="/home" component={HomePage} />
-          <Route path="/new" component={SignUp} />
+          <Route path="/new">
+            <SignUp data={data}/>
+          </Route>
           <Route path="/logout" component={LogOut} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/question" component={Question} />

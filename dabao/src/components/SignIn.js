@@ -1,12 +1,23 @@
 import * as React from "react"
 import Nav from "./Nav"
 const SignIn = () => {
-    return (
+  const handleSubmit = (event) =>{ 
+  event.preventDefault();
+  const username = event.target.elements.username.value;
+  const password = event.target.elements.password.value;
+  fetch("/sessions", {
+  method: "POST",
+  body: JSON.stringify({ username: username, password: password }),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+}
+return (
 <Nav>
 <h1>Sign In!</h1>
 <div className="SignInForm">
-<form>
-  <form>
+<form onSubmit={handleSubmit}>
     <label>
       Username:
       <br></br>
@@ -20,7 +31,6 @@ const SignIn = () => {
     </label>
     <br></br>
     <input type="submit" value="Login" />
-  </form>
 </form>
 </div>
 </Nav>
