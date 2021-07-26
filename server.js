@@ -32,6 +32,8 @@ const shopController = require("./controllers/shop.js");
 app.use("/shop", shopController);
 const matchController = require("./controllers/match.js")
 app.use("/match", matchController);
+const sessionsController = require("./controllers/sessions.js")
+app.use("/sessions", sessionsController)
 
 const seed = require("./models/users.seed.js");
 const User = require("./models/users.model.js");
