@@ -4,6 +4,7 @@ import { LoggedContext } from "../App.js";
 
 const Nav = (props) => {
   const loggedContext = useContext(LoggedContext);
+  console.log(loggedContext.logState)
 
   if (!loggedContext.logState) {
     return (
