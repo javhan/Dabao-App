@@ -1,11 +1,11 @@
 import React from "react"
-import NavIn from "./NavIn"
+import Nav from "./NavIn"
 
 const Profile = () => {
     return (
-        <NavIn>
+        <Nav>
             <h1>Update Profile</h1>
-        </NavIn>
+        </Nav>
     )
 }
 

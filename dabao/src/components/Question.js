@@ -1,10 +1,10 @@
 import React from "react"
-import NavIn from "./NavIn"
+import Nav from "./NavIn"
 import { Link } from "react-router-dom";
 
 const Question = () =>{
     return(
-        <NavIn>
+        <Nav>
             <div className="box">
                 <h1>DBer Questionnaire</h1>
             </div>
@@ -13,7 +13,7 @@ const Question = () =>{
                 To Dashboard
                 </Link>
             </div>
-        </NavIn>
+        </Nav>
     )
 }
 
