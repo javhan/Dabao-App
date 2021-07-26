@@ -18,12 +18,26 @@ router.get("/", (req, res) => {
 
 // Get a single match by ID
 // curl http://localhost:<PORT>/match/<id>
-router.get("/:id", (req, res) => {
+router.get("/id/:id", (req, res) => {
   Match.findById(req.params.id, (err, matchFound) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
     res.status(200).json(matchFound);
+  });
+});
+
+// Get all users under same poscode
+// curl http://localhost:<PORT>/users/poscode/<poscode>
+router.get("/postcode/:postcode", (req, res) => {
+  console.log(req.params.postcode)
+  
+  Match.find({ 'pickupLocation.postCode':req.params.postcode }, (err, matchesFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    // console.log(matchesFound)
+    res.status(200).json(matchesFound);
   });
 });
 

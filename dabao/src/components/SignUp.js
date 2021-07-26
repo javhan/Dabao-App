@@ -15,7 +15,7 @@ const SignUp = () => {
       return;
     }
     
-    fetch("http://localhost:4000/users", {
+    fetch("/users", {
       method: "POST",
       body: JSON.stringify({ 
         username: event.target.username.value,   
