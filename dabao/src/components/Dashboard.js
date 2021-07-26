@@ -8,7 +8,7 @@ const Dashboard = () => {
   //   console.log(loggedContext.logState._id);
 
   useEffect(() => {
-    fetch("/match/60fbae8c71401c1521d7027c", {
+    fetch(`/match/${loggedContext.logState._id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -16,11 +16,21 @@ const Dashboard = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setDashboard(data));
   }, []);
+
+  const activeJobs = dashboard.map((data, index) => {
+    return (
+      <div>
+        <h1>Pickup Point: {data.pickupLocation.street}</h1>
+      </div>
+    )
+  })
+
   return (
     <Nav>
       <h1>Dashboard</h1>
+      {activeJobs}
     </Nav>
   );
 };

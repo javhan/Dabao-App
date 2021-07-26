@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import Nav from "./Nav";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { LoggedContext } from "../App.js";
 
 const Question = () => {
+  const loggedContext = useContext(LoggedContext);
+  console.log(loggedContext.logState._id)
   const history = useHistory();
   const handleSubmit = (event) => {
     fetch("/match", {
       method: "POST",
       body: JSON.stringify({
+        DBER: loggedContext.logState._id,
         maxOrders: event.target.maxOrders.value,
         pickupLocation: {
           street: event.target.pickup.value,
