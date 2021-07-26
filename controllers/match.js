@@ -8,8 +8,8 @@ var mongoose = require('mongoose');
 // Get all match
 // curl http://localhost:<PORT>/match
 router.get("/:id", (req, res) => {
-  console.log(req.params.id)
-  Match.find({ "DBER" : req.params.id }, (err, matchFound) => {
+  id = mongoose.Types.ObjectId(req.params.id)
+  Match.find({ "DBER" : id }, (err, matchFound) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
@@ -32,7 +32,7 @@ router.get("/", (req, res) => {
 
 // Create a new Match
 router.post("/", (req, res) => {
-  req.body.DBER = new mongoose.mongo.ObjectId(req.body.DBER)
+  req.body.DBER = mongoose.Types.ObjectId(req.body.DBER)
   Match.create(req.body, (error, createdMatch) => {
     if (error) {
       res.status(400).json({ error: error.message });
