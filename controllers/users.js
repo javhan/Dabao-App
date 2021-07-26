@@ -50,6 +50,7 @@ router.get("/postcode/:postcode", (req, res) => {
 // '{"username":"TEST 123","password":"ga123"}' http://localhost:<PORT>/users
 router.post("/", (req, res) => {
   console.log("body",req.body)
+
   req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync(10)
