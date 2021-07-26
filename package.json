@@ -1,6 +1,7 @@
 {
   "name": "dabao-app",
   "version": "1.0.0",
+  "engine":{"node":"v16.4.0"},
   "description": "",
   "main": "server.js",
   "scripts": {
