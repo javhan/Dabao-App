@@ -28,10 +28,10 @@ const Nav = (props) => {
             src="https://i.imgur.com/PKSYPMs.png"
           />
           <div className="navLeft">
-            <Link to="/home">DabaoPls</Link>
+            <Link to="/">DabaoPls</Link>
           </div>
           <div className="navRight">
-            <Link to="/">Login</Link>
+            <Link to="/login">Login</Link>
           </div>
           <div className="navRight">
             <Link to="/new">Sign Up</Link>
@@ -51,6 +51,9 @@ const Nav = (props) => {
           />
           <div className="navLeft">
             <Link to="/home">DabaoPls</Link>
+          </div>
+          <div>
+            <h6>Welcome, {loggedContext.logState.username} </h6>
           </div>
           <div className="navRight" onClick={handleSubmit}>
             Log Out
