@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import SignIn from "./components/SignIn";
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp";
@@ -16,6 +16,10 @@ export const LoggedContext = createContext();
 function App() {
   const [logState, setLogState] = useState();
   const onOff = { logState, setLogState };
+
+useEffect(()=> {
+  fetch("/")
+}, [])
 
   return (
     <div className="App">
