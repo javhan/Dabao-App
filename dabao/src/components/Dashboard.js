@@ -21,7 +21,9 @@ const Dashboard = () => {
 
   const activeJobs = dashboard.map((data, index) => {
     return (
-      <h1>Pickup Point: {data.pickupLocation.street}</h1>
+      <div>
+        <h1>Pickup Point: {data.pickupLocation.street}</h1>
+      </div>
     )
   })
 
