@@ -1,11 +1,10 @@
 import React from "react";
 import Nav from "./NavIn";
-import { useState } from "react";
-import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Question = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
+    const history = useHistory();
   const handleSubmit = (event) => {
     fetch("/match", {
       method: "POST",
@@ -23,14 +22,10 @@ const Question = () => {
     })
       .then((res) => {
         if (res.ok) {
-          setIsSuccess(true);
-          return res.json();
+          res.json();
         }
-        throw new Error("Error in Network");
-      })
-      .then((resJson) => {
-        console.log("resJson", resJson);
       });
+    history.push("/dashboard")
   };
   return (
     <Nav>
@@ -70,7 +65,7 @@ const Question = () => {
           </fieldset>
           <br/>
           <fieldset>
-        <legend>No. of Orders!(Pssst Maximum Order is 2)</legend>
+        <legend>No. of Orders</legend>
           <select
             type="range"
             name="maxOrders"
@@ -82,7 +77,6 @@ const Question = () => {
           <br/>
           <input type="submit" value="Confirm!" />
         </form>
-        {isSuccess && <Redirect to="/dashboard" />}
       </div>
       <div>
         <Link to="/dashboard">To Dashboard</Link>
