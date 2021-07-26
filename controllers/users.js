@@ -49,12 +49,15 @@ router.get("/postcode/:postcode", (req, res) => {
 // curl -X POST -H "Content-Type: application/json" -d
 // '{"username":"TEST 123","password":"ga123"}' http://localhost:<PORT>/users
 router.post("/", (req, res) => {
+  console.log("body",req.body)
+
   req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync(10)
   );
   User.create(req.body, (error, createdUser) => {
     if (error) {
+      // console.log("error",error)
       res.status(400).json({ error: error.message });
     }
     res.status(200).json(createdUser);

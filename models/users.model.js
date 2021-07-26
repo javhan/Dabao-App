@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
       hp : { type : Number, required : true },
       email : { type: String, required: true, unique : true }
   },
-  isDabao : { type : String, default : "DBee" }
+  // isDabao : { type : String, default : "DBee" }
 },{ timestamps:true });
 
 const User = mongoose.model("user", userSchema);
