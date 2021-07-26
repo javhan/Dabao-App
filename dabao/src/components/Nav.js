@@ -11,11 +11,11 @@ const Nav = (props) => {
     fetch("http://localhost:4000/sessions", {
       method: "DELETE",
       headers: {
-        "Content-type": "application/json"
-      }
-    })
-    history.push("/")
-    loggedContext.setLogState()
+        "Content-type": "application/json",
+      },
+    });
+    history.push("/");
+    loggedContext.setLogState();
   };
 
   if (!loggedContext.logState) {
@@ -66,6 +66,6 @@ const Nav = (props) => {
       </>
     );
   }
-}
+};
 
 export default Nav;
