@@ -12,7 +12,7 @@ const SignIn = () => {
     event.preventDefault();
     const username = event.target.elements.username.value;
     const password = event.target.elements.password.value;
-    fetch("http://localhost:4000/sessions", {
+    fetch("/sessions", {
       method: "POST",
       body: JSON.stringify({ username: username, password: password }),
       headers: {
@@ -25,6 +25,7 @@ const SignIn = () => {
       throw new Error("Error in network")
     })
     .then((resJson) => {
+        console.log(resJson)
         loggedContext.setLogState(resJson)
         history.push("/home")
     });

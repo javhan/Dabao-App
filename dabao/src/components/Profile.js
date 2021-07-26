@@ -1,5 +1,5 @@
 import React from "react"
-import Nav from "./NavIn"
+import Nav from "./Nav"
 
 const Profile = () => {
     return (

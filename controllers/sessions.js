@@ -6,8 +6,8 @@ const methodOverride = require("method-override")
 
 sessions.use(methodOverride("_method"))
 
-sessions.get("/new", (req, res) => {
-    res.send("testing sign up/login")
+sessions.get("/", (req, res) => {
+    res.send(req.session.currentUser)
 })
 
 //POST for logging in
@@ -21,7 +21,7 @@ sessions.post("/", (req, res) => {
         } else {
             if(bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser
-                console.log("Logged in!")
+                console.log(req.session.currentUser)
                 res.send(foundUser)
             } else {
                 res.send("password does not match")
@@ -32,7 +32,6 @@ sessions.post("/", (req, res) => {
 
 sessions.delete("/", (req, res) => {
     req.session.destroy(() => {
-        console.log("logged out")
     })
 })
 

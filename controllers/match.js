@@ -7,6 +7,17 @@ var mongoose = require('mongoose');
 
 // Get all match
 // curl http://localhost:<PORT>/match
+router.get("/:id", (req, res) => {
+  console.log(req.params.id)
+  Match.find({ "DBER" : req.params.id }, (err, matchFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    console.log(matchFound)
+    res.status(200).json(matchFound);
+  });
+});
+
 router.get("/", (req, res) => {
   Match.find({}, (err, allMatches) => {
     if (err) {
@@ -18,14 +29,6 @@ router.get("/", (req, res) => {
 
 // Get a single match by ID
 // curl http://localhost:<PORT>/match/<id>
-router.get("/:id", (req, res) => {
-  Match.findById(req.params.id, (err, matchFound) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-    }
-    res.status(200).json(matchFound);
-  });
-});
 
 // Create a new Match
 router.post("/", (req, res) => {
