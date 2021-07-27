@@ -41,15 +41,15 @@ router.get("/id/:id", (req, res) => {
 // curl http://localhost:<PORT>/users/poscode/<poscode>
 router.get("/postcode/:postcode", async (req, res) => {
   // console.log(req.params.postcode)
-  const match = await Match.find({ 'pickupLocation.postCode':req.params.postcode }).populate('DBER')
-  res.status(200).json(match)
-  // Match.find({ 'pickupLocation.postCode':req.params.postcode }, (err, matchesFound) => {
-  //   if (err) {
-  //     res.status(400).json({ error: err.message });
-  //   }
-  //   // console.log(matchesFound)
-  //   res.status(200).json(matchesFound);
-  // });
+  // const match = await Match.find({ 'pickupLocation.postCode':req.params.postcode }).populate('DBER')
+  // res.status(200).json(match)
+  Match.find({ 'pickupLocation.postCode':req.params.postcode }, (err, matchesFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    // console.log(matchesFound)
+    res.status(200).json(matchesFound);
+  });
 });
 // .populate({path: "DBER",model:"User"})
 

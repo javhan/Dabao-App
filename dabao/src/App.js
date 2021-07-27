@@ -6,9 +6,10 @@ import SignUp from "./components/SignUp";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
-import Board from "./components/BoardTr";
+// import Board from "./components/BoardTr";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
+import BoardTr from "./components/BoardTr";
 
 export const LoggedContext = createContext();
 
@@ -35,7 +36,7 @@ useEffect(()=> {
             <Route path="/new" component={SignUp} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/question" component={Question} />
-            <Route path="/board" component={Board} />
+            <Route path="/board" component={BoardTr} />
             <Route path="/profile" component={Profile} />
             <Route path="/signupsuccess" component={SignUpSuccess} />
             <Redirect to="/" />
