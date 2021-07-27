@@ -53,7 +53,7 @@ const Nav = (props) => {
             <Link to="/home">DabaoPls</Link>
           </div>
           <div>
-            <h6>Welcome, {loggedContext.logState.username} </h6>
+            <div className="navLeft">Welcome, {loggedContext.logState.username}! </div>
           </div>
           <div className="navRight" onClick={handleSubmit}>
             Log Out

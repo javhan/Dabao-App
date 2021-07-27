@@ -1,0 +1,18 @@
+.jobsNorders {
+    display: flex;
+}
+.activeJobs, .activeOrders {
+    border-style: ridge;
+    height: 300px;
+    width: 300px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.activeJobs {
+    width: 40%
+}
+
+.activeOrders {
+    width: 40%
+}
