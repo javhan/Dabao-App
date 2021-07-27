@@ -5,7 +5,6 @@ import { LoggedContext } from "../App.js";
 
 const Question = () => {
   const loggedContext = useContext(LoggedContext);
-  console.log(loggedContext.logState._id)
   const history = useHistory();
   const handleSubmit = (event) => {
     fetch("/match", {
