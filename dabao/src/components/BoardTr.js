@@ -68,7 +68,7 @@ const Board = () => {
         {matches.length===0 && <h1>NO Dabao-Er AVAILABLE AT YOUR CURRENT LOCATION</h1>}
       </div>
       <div>
-        <Link to="/dashboard">To Dashboard</Link>
+        <Link to="/dashboard"><button className="btstyle">To Dashboard</button></Link>
       </div>
       </Nav>
     )
@@ -116,7 +116,7 @@ const Board = () => {
       </table>
       </div>
       <div>
-        <Link to="/dashboard">To Dashboard</Link>
+        <Link to="/dashboard"><button className="btstyle">To Dashboard</button></Link>
       </div>
     </Nav>
   );

@@ -9,6 +9,8 @@ import Question from "./components/Question";
 import Board from "./components/BoardTr";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
+import UpdateSuccess from "./components/UpdateSuccess";
+
 
 export const LoggedContext = createContext();
 
@@ -40,6 +42,7 @@ useEffect(()=> {
             <Route path="/board" component={Board} />
             <Route path="/profile" component={Profile} />
             <Route path="/signupsuccess" component={SignUpSuccess} />
+            <Route path="/updatesuccess" component={UpdateSuccess} />
             <Redirect to="/" />
           </Switch>
         </main>

@@ -44,7 +44,7 @@ const Question = () => {
             <legend>What are you eating?</legend>
             <input type="text" name="food" />
             <legend>Whats the price?</legend>
-            <input type="number" name="price"/>
+            <input type="number" name="price" min="0" step=".01"/>
           </fieldset>
           <br />
           <fieldset>
@@ -77,9 +77,6 @@ const Question = () => {
           <br />
           <input type="submit" value="Confirm!" />
         </form>
-      </div>
-      <div>
-        <Link to="/dashboard">To Dashboard</Link>
       </div>
     </Nav>
   );
