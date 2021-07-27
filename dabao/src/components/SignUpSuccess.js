@@ -5,7 +5,7 @@ const SignUpSuccess = () => {
     return (
         <Nav>
         <div>
-            <h3>You are successfully signed up</h3><bt/>
+            <h3>You are successfully signed up</h3>
             <h3>Please login to proceed</h3>
         </div>
         </Nav>

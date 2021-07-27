@@ -6,7 +6,7 @@ import SignUp from "./components/SignUp";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
-import Board from "./components/Board";
+import Board from "./components/BoardTr";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
 
