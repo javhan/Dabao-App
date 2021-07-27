@@ -1,20 +1,24 @@
-import React from "react";
-import Nav from "./NavIn";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import Nav from "./Nav";
+import { Link, useHistory } from "react-router-dom";
+import { LoggedContext } from "../App.js";
 
 const Question = () => {
+  const loggedContext = useContext(LoggedContext);
+  console.log(loggedContext.logState._id)
   const history = useHistory();
   const handleSubmit = (event) => {
     fetch("/match", {
       method: "POST",
       body: JSON.stringify({
+        DBER: loggedContext.logState._id,
         maxOrders: event.target.maxOrders.value,
         pickupLocation: {
-          street: event.target.street.value,
-          postCode: event.target.postCodeOrder.value,
+          street: event.target.pickup.value,
         },
         timeAtPickUp: event.target.timeAtPickUp.value,
+        orderLocation: { street: event.target.eating.value },
+
       }),
       headers: {
         "Content-Type": "application/json",
@@ -32,22 +36,13 @@ const Question = () => {
         <h1>DBer Questionnaire</h1>
         <form onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Where are you DB-ing?</legend>
-            <input type="text" name="street" />
+            <legend>Where are you Eating?</legend>
+            <input type="text" name="eating" />
           </fieldset>
           <br />
           <fieldset>
-            <legend>Postal Code of DB place</legend>
-            <input type="text" name="postCodeOrder" />
-          </fieldset>
-          <br />
-          <fieldset>
-            <legend>Pick-Up Location</legend>
-            <input
-              type="text"
-              name="postCodePickUp"
-              placeholder="Postal Code"
-            />
+            <legend>Where to Pick-up?</legend>
+            <input type="text" name="pickup" />
           </fieldset>
           <br />
           <fieldset>

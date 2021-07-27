@@ -3,7 +3,6 @@ import React, { useState, createContext, useEffect } from "react";
 import SignIn from "./components/SignIn";
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp";
-import LogOut from "./components/LogOut";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
@@ -15,6 +14,11 @@ export const LoggedContext = createContext();
 
 function App() {
   const [logState, setLogState] = useState();
+
+  useEffect(() => {
+    fetch("/sessions").then((res) => res.json()).then((data) => setLogState(data))
+  }, [])
+
   const onOff = { logState, setLogState };
 
 useEffect(()=> {
@@ -26,10 +30,9 @@ useEffect(()=> {
       <LoggedContext.Provider value={onOff}>
         <main>
           <Switch>
-            <Route exact path="/" component={SignIn} />
-            <Route path="/home" component={HomePage} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={SignIn} />
             <Route path="/new" component={SignUp} />
-            <Route path="/logout" component={LogOut} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/question" component={Question} />
             <Route path="/board" component={Board} />
