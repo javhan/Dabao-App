@@ -16,7 +16,9 @@ function App() {
   const [logState, setLogState] = useState();
 
   useEffect(() => {
-    fetch("/sessions").then((res) => res.json()).then((data) => setLogState(data))
+    fetch("/sessions")
+    .then((res) => res.json())
+    .then((data) => setLogState(data))
   }, [])
 
   const onOff = { logState, setLogState };

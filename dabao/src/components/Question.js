@@ -15,6 +15,7 @@ const Question = () => {
         maxOrders: event.target.maxOrders.value,
         pickupLocation: {
           street: event.target.pickup.value,
+          postCode: event.target.postcode.value
         },
         timeAtPickUp: event.target.timeAtPickUp.value,
         orderLocation: { street: event.target.eating.value },
@@ -43,6 +44,11 @@ const Question = () => {
           <fieldset>
             <legend>Where to Pick-up?</legend>
             <input type="text" name="pickup" />
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Pick-up Postal Code</legend>
+            <input type="text" name="postcode" />
           </fieldset>
           <br />
           <fieldset>

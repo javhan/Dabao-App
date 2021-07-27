@@ -9,8 +9,8 @@ const Board = () => {
   const [matches, setMatches] = useState([])
   const [toggleUpdate, settoggleUpdate] = useState(false)
 
-  //  console.log("logcontext",loggedContext) 
-  const postcode = loggedContext.logState.address.postCode
+  console.log("logcontext",loggedContext) 
+  const postcode = loggedContext?.logState?.address?.postCode
    useEffect(() => {
     axios
       .get(`/match/postcode/${postcode}`)
