@@ -10,6 +10,7 @@ import Question from "./components/Question";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
 import BoardTr from "./components/BoardTr";
+import "tailwindcss/tailwind.css"
 
 export const LoggedContext = createContext();
 
