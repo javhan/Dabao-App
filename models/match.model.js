@@ -9,7 +9,6 @@ const matchSchema = new mongoose.Schema({
       DBEE: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       isCompleted: {type: Boolean, default:false},
       remarks: String,
-      dishOrdered: { itemName: String, itemPrice: Number },
       messages: [
         {
           message: String,
@@ -22,6 +21,7 @@ const matchSchema = new mongoose.Schema({
   pickupLocation: { street: String, postCode: Number },
   timeAtPickUp: Date,
   orderLocation: { street: String, postCode: Number },
+  dishOrdered: { itemName: String, itemPrice: Number },
 }, {timestamps: true});
 
 const Match = mongoose.model("Match", matchSchema);
