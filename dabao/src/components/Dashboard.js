@@ -40,7 +40,7 @@ const Dashboard = () => {
     })
       .then((res) => res.json())
       .then((data) => setDBEEdashboard(data));
-  }, []);
+  }, [loggedContext.logState._id]);
 
   const activeJobs = dashboard.map((data, index) => {
     return (
