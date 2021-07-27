@@ -7,7 +7,7 @@ const HomePage = () => {
     <Nav>
       <div className="flex">
         <Link to="/question" className="flex-child">
-          <div className="flex=child">
+          <div >
             <h1 className="DabaoLeft">Going Out To Dabao?</h1>
             <img
               className="icon"
@@ -17,7 +17,7 @@ const HomePage = () => {
           </div>
         </Link>
         <Link to="/board" className="flex-child">
-          <div className="flex=child">
+          <div >
             <img
               className="icon"
               alt=""

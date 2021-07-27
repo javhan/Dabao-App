@@ -39,7 +39,7 @@ const SignUp = () => {
     })
       .then((resJson) => {
         // props.handleAddHoliday(resJson);
-        console.log("resJson",resJson)
+        // console.log("resJson",resJson)
         
       })
       .catch((error) => console.error({ Error: error }));

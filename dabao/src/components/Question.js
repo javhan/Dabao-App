@@ -5,7 +5,6 @@ import { LoggedContext } from "../App.js";
 
 const Question = () => {
   const loggedContext = useContext(LoggedContext);
-  console.log(loggedContext.logState._id)
   const history = useHistory();
   const handleSubmit = (event) => {
     fetch("/match", {
@@ -15,10 +14,16 @@ const Question = () => {
         maxOrders: event.target.maxOrders.value,
         pickupLocation: {
           street: event.target.pickup.value,
+          postCode: event.target.postcode.value
         },
         timeAtPickUp: event.target.timeAtPickUp.value,
-        orderLocation: { street: event.target.eating.value },
-
+        orderLocation: { 
+            street: event.target.eating.value 
+        },
+        dishOrdered: { 
+            itemName: event.target.food.value,
+            itemPrice: event.target.price.value
+         },
       }),
       headers: {
         "Content-Type": "application/json",
@@ -35,14 +40,26 @@ const Question = () => {
       <div className="box">
         <h1>DBer Questionnaire</h1>
         <form onSubmit={handleSubmit}>
+        <fieldset>
+            <legend>What are you eating?</legend>
+            <input type="text" name="food" />
+            <legend>Whats the price?</legend>
+            <input type="number" name="price"/>
+          </fieldset>
+          <br />
           <fieldset>
-            <legend>Where are you Eating?</legend>
+            <legend>Where are you ordering from?</legend>
             <input type="text" name="eating" />
           </fieldset>
           <br />
           <fieldset>
             <legend>Where to Pick-up?</legend>
             <input type="text" name="pickup" />
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Postal Code of Pick-up</legend>
+            <input type="text" name="postcode" />
           </fieldset>
           <br />
           <fieldset>

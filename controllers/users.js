@@ -23,6 +23,16 @@ router.get("/", (req, res) => {
   });
 });
 
+router.put("/edit/:id", (req, res)=> {
+  console.log("req body", req.body)
+  User.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, userFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } console.log(userFound)
+    res.status(200).json(userFound);
+  })
+})
+
 // Get a single user by ID
 // curl http://localhost:<PORT>/users/id/<id>
 router.get("/id/:id", (req, res) => {
@@ -37,7 +47,7 @@ router.get("/id/:id", (req, res) => {
 // Get all users under same poscode
 // curl http://localhost:<PORT>/users/poscode/<poscode>
 router.get("/postcode/:postcode", (req, res) => {
-  User.find({ 'address.poscode':req.params.poscode }, (err, userFound) => {
+  User.find({ 'address.postCode':req.params.postcode }, (err, userFound) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
