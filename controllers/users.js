@@ -23,6 +23,16 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/edit/:id", (req, res)=> {
+  console.log(req.params.body)
+  User.findByIdAndUpdate(req.params.id, req.params.body, (err, userFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(userFound);
+  })
+})
+
 // Get a single user by ID
 // curl http://localhost:<PORT>/users/id/<id>
 router.get("/id/:id", (req, res) => {

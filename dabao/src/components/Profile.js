@@ -4,11 +4,11 @@ import { LoggedContext } from "../App.js";
 
 const Profile = () => {
 const loggedContext = useContext(LoggedContext);
-console.log(loggedContext.logState._id)
-
+const id = loggedContext?.logState?._id
+console.log(id)
 const handleSubmit = (event) => {
-fetch("/id/:id", {
-    method: 'POST',
+fetch(`/users/edit/${id}`, {
+    method: 'PUT',
     body: JSON.stringify({
         address: {
             street: event.target.street.value,
@@ -28,6 +28,29 @@ fetch("/id/:id", {
     return (
         <Nav>
             <h1>Update Profile</h1>
+            <form onSubmit={handleSubmit}>
+          <fieldset>
+            <legend>Address</legend>
+            <input type="text" name="street" />
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Postal Code</legend>
+            <input type="number" name="postcode" />
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Phone Number</legend>
+            <input type="number" name="hp" />
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>E-mail Address</legend>
+            <input type="text" name="email" />
+          </fieldset>
+          <br />
+          <input type="submit" value="Confirm!" />
+        </form>
         </Nav>
     )
 }
