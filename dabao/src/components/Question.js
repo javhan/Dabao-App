@@ -47,7 +47,7 @@ const Question = () => {
           </fieldset>
           <br />
           <fieldset>
-            <legend>Pick-up Postal Code</legend>
+            <legend>Postal Code of Pick-up</legend>
             <input type="text" name="postcode" />
           </fieldset>
           <br />
