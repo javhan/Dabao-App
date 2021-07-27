@@ -89,4 +89,9 @@ padding: 50px;
   height: 500px;
   width: 50%;
   margin: 50px auto;
+  overflow-y: auto;
+}
+
+tr{
+  width: 33%;
 }
