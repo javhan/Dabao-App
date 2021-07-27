@@ -5,11 +5,23 @@ const Match = require("../models/match.model.js");
 const User = require("../models/users.model.js")
 var mongoose = require('mongoose');
 
-// Get all match
+// Get all match for active jobs
 // curl http://localhost:<PORT>/match
-router.get("/:id", (req, res) => {
+router.get("/DBER/:id", (req, res) => {
   id = mongoose.Types.ObjectId(req.params.id)
   Match.find({ "DBER" : id }, (err, matchFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    console.log(matchFound)
+    res.status(200).json(matchFound);
+  });
+});
+
+// Get all match for active orders
+router.get("/DBEE/:id", (req, res) => {
+  id = mongoose.Types.ObjectId(req.params.id)
+  Match.find({ "DBEE" : id }, (err, matchFound) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
