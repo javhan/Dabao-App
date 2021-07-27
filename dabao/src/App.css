@@ -96,3 +96,16 @@ padding: 50px;
 #greeting {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.board {
+  border: 1px solid black;
+  background-color: aqua;
+  height: 400px;
+  width: 70%;
+  margin: 50px auto;
+}
+
+
+/* .boardTable {
+  border: 1px solid blue;
+
+} */
