@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import axios from "axios"
@@ -72,16 +72,16 @@ const Board = () => {
       <div className="box">
         {matches.length===0 && <h1>NO Dabao-Er AVAILABLE AT YOUR CURRENT LOCATION</h1>}
       </div>
-      <div>
+      {/* <div>
         <Link to="/dashboard">To Dashboard</Link>
-      </div>
+      </div> */}
       </Nav>
     )
   } else {
   return (
     <Nav>
-      <div className="board">
-      <table className="boardTable">
+      <div >
+      <table>
         <tbody>
           <tr>
             <th>Dabao-Er</th>
@@ -96,8 +96,8 @@ const Board = () => {
             <th>Action</th>
             <th>Status</th>
           </tr>
-          {matches?.map((match) => {
-            // const style = {backgroundColor: match.availOrder ? "orange" : "yellow"};
+          {matches?.map((match,index) => {
+            
             const slotsAvail = match.maxOrders - match.Orders.length;
             
             let isConfirmedOrder = false;
@@ -111,7 +111,7 @@ const Board = () => {
               (loggedContext?.logState?._id === match.DBER._id))
                 return (<></>)
             return (
-              <tr key={match._id}>
+              <tr className="bg-emerald-200" key={match._id}>
                 <td>{match.DBER.username}</td>
                 {/* <td>{match.DBER._id}</td> */}
                 <td>{match.dishOrdered?.itemName}</td>
@@ -120,7 +120,8 @@ const Board = () => {
                 <td>{match.pickupLocation.postCode}</td>
                 <td>{match.orderLocation.street}</td>
                 {/* <td>{match.timeAtPickUp}</td> */}
-                <td>{moment("20010704T120854").format("lll")}</td>
+                <td>{moment(match.timeAtPickUp).format("lll")}</td>
+                {/* <td>{moment("20010704T120854").format("lll")}</td> */}
                 <td>{slotsAvail}</td>
                 <td>{!isConfirmedOrder && <button onClick={()=>debouncedSavePlus(match)}>+</button>}
                     {isConfirmedOrder && <button onClick={()=>debouncedSaveMinus(match)}>-</button>}</td>
@@ -131,8 +132,8 @@ const Board = () => {
         </tbody>
       </table>
       </div>
-      <div>
-        <Link to="/dashboard">To Dashboard</Link>
+      <div><br/><br/>
+        <Link to="/dashboard"><button>To Dashboard</button></Link>
       </div>
     </Nav>
   );
