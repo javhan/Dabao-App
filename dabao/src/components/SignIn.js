@@ -25,7 +25,6 @@ const SignIn = () => {
       throw new Error("Error in network")
     })
     .then((resJson) => {
-        console.log(resJson)
         loggedContext.setLogState(resJson)
         history.push("/home")
     });

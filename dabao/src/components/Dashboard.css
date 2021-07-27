@@ -13,6 +13,20 @@
     width: 40%
 }
 
+.jobDetails {
+    text-align: left;
+    padding-left: 10%
+}
+
 .activeOrders {
     width: 40%
+}
+
+.chat {
+    float: right;
+    padding-right: 10%;
+}
+
+li {
+    list-style-type: none;
 }
