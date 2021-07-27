@@ -100,8 +100,8 @@ const Board = () => {
             }
             return (
               <tr key={match._id}>
-                <td>{match.DBER.name}</td>
-                <td>{match.DBER}</td>
+                <td>{match.DBER.username}</td>
+                <td>{match.DBER._id}</td>
                 <td>{match.pickupLocation.street}</td>
                 <td>{match.orderLocation.street}</td>
                 <td>{match.timeAtPickUp}</td>
