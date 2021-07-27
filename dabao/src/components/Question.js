@@ -41,7 +41,7 @@ const Question = () => {
         <h1>DBer Questionnaire</h1>
         <form onSubmit={handleSubmit}>
         <fieldset>
-            <legend>Where are you eating?</legend>
+            <legend>What are you eating?</legend>
             <input type="text" name="food" />
             <legend>Whats the price?</legend>
             <input type="number" name="price"/>

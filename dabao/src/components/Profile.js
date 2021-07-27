@@ -1,28 +1,52 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Nav from "./Nav"
 import { LoggedContext } from "../App.js";
 
 const Profile = () => {
 const loggedContext = useContext(LoggedContext);
 const id = loggedContext?.logState?._id
-console.log(id)
+console.log(loggedContext?.logState?.address?.street)
+const base = {
+    address: {
+        street: loggedContext?.logState?.address?.street,
+        postCode: loggedContext?.logState?.address?.postCode
+    },
+    contact: {
+        hp: loggedContext?.logState?.contact?.hp,
+        email: loggedContext?.logState?.contact?.email
+    }
+}
+
+console.log(base)
+const [info, setInfo] = useState(base)
+
+console.log(info)
+
 const handleSubmit = (event) => {
+setInfo({
+    address: {
+        street: event?.target.street.value,
+        postCode: event?.target.postcode.value
+    },
+    contact: {
+        hp: event?.target.hp.value,
+        email: event?.target.email.value
+    }
+ })
+
+console.log(info)
 fetch(`/users/edit/${id}`, {
     method: 'PUT',
-    body: JSON.stringify({
-        address: {
-            street: event.target.street.value,
-            postCode: event.target.postcode.value
-        },
-        contact: {
-            hp: event.target.hp.value,
-            email: event.target.email.value
-        }
-     }),
+    body: JSON.stringify(info),
     headers: {
             "Content-Type": "application/json",
           }
-        })
+        }).then((res) => { 
+              return res.json()
+            })
+            .then((resJson) => {
+                console.log(resJson)
+            })
 }
 
     return (

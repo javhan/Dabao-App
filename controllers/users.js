@@ -23,12 +23,12 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/edit/:id", (req, res)=> {
-  console.log(req.params.body)
-  User.findByIdAndUpdate(req.params.id, req.params.body, (err, userFound) => {
+router.put("/edit/:id", (req, res)=> {
+  console.log("req body", req.body)
+  User.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, userFound) => {
     if (err) {
       res.status(400).json({ error: err.message });
-    }
+    } console.log(userFound)
     res.status(200).json(userFound);
   })
 })
