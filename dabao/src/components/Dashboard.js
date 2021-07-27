@@ -17,7 +17,7 @@ const Dashboard = () => {
     })
       .then((res) => res.json())
       .then((data) => setDashboard(data));
-  }, []);
+  }, [loggedContext.logState._id]);
 
   const activeJobs = dashboard.map((data, index) => {
     return (

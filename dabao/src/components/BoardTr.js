@@ -88,7 +88,7 @@ const Board = () => {
             <th>Action</th>
             <th>Status</th>
           </tr>
-          {matches.map((match) => {
+          {matches?.map((match) => {
             // const style = {backgroundColor: match.availOrder ? "orange" : "yellow"};
             const slotsAvail = match.maxOrders - match.Orders.length;
             let isConfirmedOrder = false;
