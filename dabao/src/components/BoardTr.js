@@ -3,14 +3,15 @@ import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import { LoggedContext } from "../App.js";
+import moment from "moment"
 
 const Board = () => {
   const loggedContext = useContext(LoggedContext);
-  const [matches, setMatches] = useState([])
+  const [matches, setMatches] = useState(["loading"])
   const [toggleUpdate, settoggleUpdate] = useState(false)
 
   //  console.log("logcontext",loggedContext) 
-  const postcode = loggedContext.logState.address.postCode
+  const postcode = loggedContext?.logState?.address.postCode
    useEffect(() => {
     axios
       .get(`/match/postcode/${postcode}`)
@@ -58,10 +59,12 @@ const Board = () => {
     .catch(function (error) {
       console.log(error);
     })
-
   }
 
-  if(matches.length === 0) {
+  if(matches[0] === "loading")
+    return (<h1>Loading ..... </h1>)
+
+  if(matches?.length === 0) {
     return (
       <Nav>
       <div className="box">
@@ -81,7 +84,9 @@ const Board = () => {
           <tr>
             <th>Dabao-Er</th>
             <th>ID </th>
+            <th>Dish</th>
             <th>Pickup-Location</th>
+            <th>PostCode</th>
             <th>Order-Location</th>
             <th>Pickup-Time</th>
             <th>Avail-Slots</th>
@@ -102,9 +107,12 @@ const Board = () => {
               <tr key={match._id}>
                 <td>{match.DBER.username}</td>
                 <td>{match.DBER._id}</td>
+                <td>{match.dish}</td>
                 <td>{match.pickupLocation.street}</td>
+                <td>{match.pickupLocation.postCode}</td>
                 <td>{match.orderLocation.street}</td>
-                <td>{match.timeAtPickUp}</td>
+                {/* <td>{match.timeAtPickUp}</td> */}
+                <td>{moment("20010704T120854").format("lll")}</td>
                 <td>{slotsAvail}</td>
                 <td>{!isConfirmedOrder && <button onClick={()=>handleAdd(match)}>+</button>}
                     {isConfirmedOrder && <button onClick={()=>handleMinus(match)}>-</button>}</td>
