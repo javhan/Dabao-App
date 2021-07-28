@@ -5,6 +5,7 @@ import axios from "axios"
 import { LoggedContext } from "../App.js";
 import moment from "moment"
 import debounce from 'lodash.debounce';
+import CollapsibleTable from './BoardMat';
 
 const Board = () => {
   const loggedContext = useContext(LoggedContext);
@@ -137,6 +138,7 @@ const Board = () => {
       <div><br/><br/>
         <Link to="/dashboard"><button>To Dashboard</button></Link>
       </div>
+      {/* <CollapsibleTable /> */}
     </Nav>
   );
   }
