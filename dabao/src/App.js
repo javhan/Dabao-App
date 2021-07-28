@@ -3,7 +3,7 @@ import React, { useState, createContext, useEffect } from "react";
 import SignIn from "./components/SignIn";
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
 import Profile from "./components/Profile";
@@ -22,7 +22,7 @@ const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
   return <Route {...rest} render={(props) => (
     logState !== undefined
     ? <Component {...props} handleChildFunc={handleChildFunc}/>
-    :<Redirect to={{pathname: '/login', state:{ from: props.location} }}/>  
+    :<div className="center">Please Login To Access<br/><button className="btstyle"><Link to="/login">Login</Link></button></div>
   )}
   />
 }
