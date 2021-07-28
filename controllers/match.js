@@ -95,7 +95,7 @@ router.post("/", (req, res) => {
 });
 
 //add message
-router.put("/DBEE/message/:orderID/", (req, res) => {
+router.put("/message/:orderID/", (req, res) => {
   console.log(req.params.orderID);
   console.log(req.body)
   Match.findOneAndUpdate(

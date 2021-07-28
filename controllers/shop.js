@@ -11,10 +11,17 @@ router.get("/", (req, res) => {
     })
 })
 
+<<<<<<< HEAD
 router.get("/:postcode", (req,res) => {
     // console.log("postal",req.params.postalcode)
     const searchStr = req.params.postalcode.slice(0,2)
     // console.log(searchStr)
+=======
+router.get("/:postalcode", (req,res) => {
+    console.log("postal",req.params.postalcode)
+    const searchStr = req.params.postalcode.slice(0,2)
+    console.log(searchStr)
+>>>>>>> ec922629580be27d8aa214abfb61ea571a2c130a
     Shop.find({ 'postalcode' :  {$regex: `^${searchStr}`}}, (err,shopsFound)=>{
         if (err) {
             res.status(400).json({ error: err.message });

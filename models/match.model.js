@@ -20,7 +20,7 @@ const matchSchema = new mongoose.Schema({
   ],
   pickupLocation: { street: String, postCode: Number },
   timeAtPickUp: Date,
-  orderLocation: { type: mongoose.Schema.Types.ObjectId, ref: "Shop" },
+  orderLocation: Object,
   dishOrdered: { itemName: String, itemPrice: Number },
 }, {timestamps: true});
 

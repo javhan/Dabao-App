@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext,useState, useRef } from "react";
 import Nav from "./Nav";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { LoggedContext } from "../App.js";
+import axios from "axios";
+import Option from "./Option"
+
 
 const Question = () => {
   const loggedContext = useContext(LoggedContext);
   const history = useHistory();
   const handleSubmit = (event) => {
+      event.preventDefault()
+      console.log(event.target.shopname.value, event.target.DBpostcode.value )
     fetch("/match", {
       method: "POST",
       body: JSON.stringify({
@@ -14,16 +19,16 @@ const Question = () => {
         maxOrders: event.target.maxOrders.value,
         pickupLocation: {
           street: event.target.pickup.value,
-          postCode: event.target.postcode.value
+          postCode: event.target.postcode.value,
         },
         timeAtPickUp: event.target.timeAtPickUp.value,
-        orderLocation: { 
-            street: event.target.eating.value 
+        dishOrdered: {
+          itemName: event.target.food.value,
+          itemPrice: event.target.price.value,
         },
-        dishOrdered: { 
-            itemName: event.target.food.value,
-            itemPrice: event.target.price.value
-         },
+        orderLocation: {
+             street: event.target.shopname.value, 
+             postCode: event.target.DBpostcode.value},
       }),
       headers: {
         "Content-Type": "application/json",
@@ -35,36 +40,74 @@ const Question = () => {
     });
     history.push("/dashboard");
   };
+  const postcode = useRef(null)
+  const [info, setInfo] = useState([])
+  
+  
+  const HandleQuery = () => {
+  
+      axios
+      .get(`/shop/${postcode.current.value}`)
+      .then(function (res) {
+        // handle success
+        setInfo(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }
+
   return (
     <Nav>
       <div className="box">
         <h1>DBer Questionnaire</h1>
         <form onSubmit={handleSubmit}>
-        <fieldset>
-            <legend>What are you eating?</legend>
-            <input type="text" name="food" />
-            <legend>Whats the price?</legend>
-            <input type="number" name="price"/>
+          <fieldset>
+            <legend>Food</legend>
+            <div className="user-box">
+            <input type="text" name="food" required/>
+            <label>What are you eating?</label>
+            </div>
+            <div className="user-box">
+            <input type="number" name="price" min="0" step=".01" required/>
+         <label>Whats the price?</label>
+         </div> 
+         </fieldset>
+          <br />
+          <fieldset>
+            <legend>Dabao Location</legend>
+            <div className="user-box">
+            <input
+              type="text"
+              name="DBpostcode"
+              onChange={HandleQuery}
+              ref={postcode}
+              required
+            />
+            <label>Postal Code</label>
+            </div>
+            <legend>Select closest store or fill in your own!</legend>
+            <input type="text" list="hawker" name="shopname" className="hawker"/>
+            <datalist id="hawker">
+              <Option data={info} />
+              </datalist>
           </fieldset>
           <br />
           <fieldset>
-            <legend>Where are you ordering from?</legend>
-            <input type="text" name="eating" />
-          </fieldset>
-          <br />
-          <fieldset>
-            <legend>Where to Pick-up?</legend>
-            <input type="text" name="pickup" />
-          </fieldset>
-          <br />
-          <fieldset>
-            <legend>Postal Code of Pick-up</legend>
-            <input type="text" name="postcode" />
-          </fieldset>
-          <br />
-          <fieldset>
+            <legend>Pick-Up</legend>
+            <div className="user-box">
+            <input type="text" name="pickup" required/>
+            <label>Where to Pick-up?</label>
+            </div>
+            <div className="user-box">
+            <input type="text" name="postcode" required/>
+            <label>Postal Code of Pick-up?</label>
+            </div>
             <legend>Pick-Up Time!</legend>
-            <input type="datetime-local" name="timeAtPickUp" />
+            <input type="datetime-local" name="timeAtPickUp" required/>
           </fieldset>
           <br />
           <fieldset>
@@ -75,11 +118,8 @@ const Question = () => {
             </select>
           </fieldset>
           <br />
-          <input type="submit" value="Confirm!" />
+          <button className="btstyle">Submit</button>
         </form>
-      </div>
-      <div>
-        <Link to="/dashboard">To Dashboard</Link>
       </div>
     </Nav>
   );

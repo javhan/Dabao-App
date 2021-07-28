@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+body{
+  background-image: url("https://i.imgur.com/hq4LgPW.jpeg");
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: auto;
+}
+
 .nav {
   background-color: #f9c906;
   overflow: hidden;
@@ -36,7 +43,6 @@ a {
   font-size: 17px;
 }
 
-
 .navRight:hover {
   background-color: #f8efe4;
 }
@@ -51,12 +57,16 @@ label {
 
 .SignInForm {
   width: 300px;
-  height: 200px;
+  height: auto;
   border: 1px solid black;
   margin: auto;
   padding: 40px 0px 0px;
   box-shadow: 5px 5px #8888;
   border-radius: 25px;
+  padding: 40px;
+  box-sizing: border-box;
+  transform: translate (-50%, -50%);
+  background-color: #f9c906;
 }
 
 .SignUpForm {
@@ -69,32 +79,58 @@ label {
   border-radius: 25px;
 }
 
-.flex{
+.flex {
   display: flex;
   height: 100vh;
 }
 
-.flex-child{
-flex: 1;
-border: 1px solid black;
-padding: 50px;
-
+.flex-child {
+  flex: 1;
+  border: 1px solid black;
+  padding: 50px;
 }
 
 .flex-child:hover {
-  background-color:#f9c906;
+  background-color: #f9c906;
 }
 
 .box {
   border: 1px solid black;
-  height: 600px;
+  height: auto;
   width: 50%;
   margin: 50px auto;
   overflow-y: auto;
+  background-color: #f9c906;
 }
 
 #greeting {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.btstyle {
+  background-color: #f8efe4;
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  padding: 14px 40px;
+}
+
+.btstyle:hover {
+  cursor: pointer;
+  background-color: #f9a406;
+}
+
+#hover:hover {
+  cursor: pointer;
 }
 .board {
   border: 1px solid black;
@@ -103,7 +139,6 @@ padding: 50px;
   width: 70%;
   margin: 50px auto;
 }
-
 
 /* .boardTable {
   border: 1px solid blue;
@@ -122,4 +157,73 @@ th {
 
 td {
   border-top: 1px solid black;
+}
+
+select {
+  width: 100%;
+  text-align: center;
+}
+.user-box {
+  position: relative;
+}
+
+.user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+.user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.user-box input:focus ~ label,
+.user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: black;
+  font-size: 12px;
+}
+.SignInForm button {
+  position: relative;
+  display: inline-block;
+  padding: 10px, 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+.SignInForm h3 {
+  margin: 0 0 30px;
+  padding: 0;
+  text-align: center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.hawker {
+  width: 100%;
+}
+
+fieldset {
+  text-align: left;
+  padding: 10px;
+  
 }
