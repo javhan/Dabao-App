@@ -62,6 +62,12 @@ const Nav = (props) => {
             <Link to="/profile">Update Profile</Link>
           </div>
           <div className="navRight">
+            <Link to="/board">Need Dabao?</Link>
+          </div>
+          <div className="navRight">
+            <Link to="/question">Help Dabao!</Link>
+          </div>
+          <div className="navRight">
             <Link to="/dashboard">Dashboard</Link>
           </div>
         </div>
