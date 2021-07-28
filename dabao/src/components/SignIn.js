@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { LoggedContext } from "../App.js"
+import { LoggedContext } from "../App.js";
 import Nav from "./Nav";
 
-
 const SignIn = () => {
-  const loggedContext = useContext(LoggedContext)
+  const loggedContext = useContext(LoggedContext);
   let history = useHistory();
 
   const handleSubmit = (event) => {
@@ -18,35 +17,32 @@ const SignIn = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      throw new Error("Error in network")
     })
-    .then((resJson) => {
-        loggedContext.setLogState(resJson)
-        history.push("/home")
-    });
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Error in network");
+      })
+      .then((resJson) => {
+        loggedContext.setLogState(resJson);
+        history.push("/home");
+      });
   };
   return (
     <Nav>
-      <h1>Sign In!</h1>
+      <h1>Login!</h1>
       <div className="SignInForm">
         <form onSubmit={handleSubmit}>
-          <label>
-            Username:
-            <br></br>
-            <input type="text" name="username" placeholder="Username" />
-          </label>
-          <br></br>
-          <label>
-            Password:
-            <br></br>
-            <input type="password" name="password" placeholder="Password" />
-          </label>
-          <br></br>
-          <input type="submit" value="Login" />
+          <div className="user-box">
+            <input type="text" name="username" required/>
+            <label>Username</label>
+          </div>
+          <div className="user-box">
+            <input type="password" name="password" required/>
+            <label>Password</label>
+          </div>
+          <button className="btstyle">Login</button>
         </form>
       </div>
     </Nav>
