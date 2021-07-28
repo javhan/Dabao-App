@@ -52,7 +52,7 @@ function DBEEdash() {
     if (message === "") {
       return;
     }
-    fetch(`/match/DBEE/message/${orderID}`, {
+    fetch(`/match/message/${orderID}`, {
       method: "PUT",
       body: JSON.stringify({
         message: message,
@@ -62,11 +62,16 @@ function DBEEdash() {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("DBEEdashboard", data);
-      });
+    }).then((res) => {
+      setChatbox([
+        ...chatbox,
+        {
+          message: message,
+          timePosted: Date.now(),
+          user: loggedContext?.logState?.username,
+        },
+      ]);
+    });
   };
 
   //Map DBEEdashboard out

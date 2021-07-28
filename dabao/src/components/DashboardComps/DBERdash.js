@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { LoggedContext } from "../../App.js";
-import Chatbox from "./Chatbox"
+import Chatbox from "./Chatbox";
 import "../Dashboard.css";
 import moment from "moment";
 
@@ -8,8 +8,8 @@ function DBERdash() {
   const [dashboard, setDashboard] = useState([]);
   const [chatbox, setChatbox] = useState();
   const loggedContext = useContext(LoggedContext);
-
-  console.log(loggedContext?.logState?._id)
+  const [convoOpp, setConvoOpp] = useState("");
+  const [orderID, setOrderID] = useState();
 
   const handleDeleteJob = (id) => {
     fetch(`/match/${id}`, {
@@ -34,14 +34,44 @@ function DBERdash() {
       });
   }, [loggedContext?.logState?._id]);
 
-  const handleChat = (chatbox) => {
-    setChatbox(chatbox);
+  const handleChat = (cb, user, order_id) => {
+    console.log(cb);
+    console.log(user);
+    console.log(order_id)
+    setChatbox(cb);
+    setConvoOpp(user);
+    setOrderID(order_id);
+  };
+  // Sending Message in Chatbox
+  const sendMessage = (message) => {
+    if (message === "") {
+      return;
+    }
+    fetch(`/match/message/${orderID}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        message: message,
+        timePosted: Date.now(),
+        user: loggedContext.logState.username,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      setChatbox([
+        ...chatbox,
+        {
+          message: message,
+          timePosted: Date.now(),
+          user: loggedContext?.logState?.username,
+        },
+      ]);
+    });
   };
 
-  
   const handleEdit = () => {
-    console.log("Edit")
-  }
+    console.log("Edit");
+  };
 
   const activeJobs = dashboard.map((data, index) => {
     return (
@@ -58,9 +88,9 @@ function DBERdash() {
         <ul>
           {data.Orders.map((inner, indexIn) => (
             <li key={indexIn}>
-              {inner.DBEE.username}
+              {inner?.DBEE?.username}
               <span className="chat">
-                <button onClick={() => handleChat(inner.DBEE.messages)}>
+                <button onClick={() => handleChat(inner?.messages, inner?.DBEE?.username, inner?._id)}>
                   Chat
                 </button>
               </span>
@@ -73,9 +103,17 @@ function DBERdash() {
 
   return (
     <div className="holder">
-      <h2>Jobs</h2>
-      <div className="jobDetails">{activeJobs}</div>
-      <Chatbox chatbox={chatbox}/>
+      <div>
+        <h2>Jobs</h2>
+        <div className="jobDetails">{activeJobs}</div>
+      </div>
+      <div>
+        <Chatbox
+          chatbox={chatbox}
+          sendMessage={sendMessage}
+          convoOpp={convoOpp}
+        />
+      </div>
     </div>
   );
 }
