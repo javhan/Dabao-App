@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+body{
+  background-image: url("https://i.imgur.com/hq4LgPW.jpeg");
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: auto;
+}
+
 .nav {
   background-color: #f9c906;
   overflow: hidden;
