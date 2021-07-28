@@ -1,32 +1,44 @@
-import React, { useState, useContext } from "react";
-import { LoggedContext } from "../../App.js";
+import React, { useState } from "react";
 import "../Dashboard.css";
+import moment from "moment";
 
 const Chatbox = (props) => {
-  console.log(props)
-  const [comment, setComment] = useState("")
-  const loggedContext = useContext(LoggedContext);
-  
+  const [comment, setComment] = useState("");
+
   const handleClick = () => {
-      props.sendMessage(comment, props.convoOpp?._id)
-  }
+    props.sendMessage(comment, props.convoOpp?._id);
+  };
+
+  const messageBox = props.chatbox?.map((messages, index) => {
+    return (
+      <div className="messageCard">
+        <div>
+          <span>{messages.user}</span>
+          <span id="timestamp">{moment(messages.timePosted).format("LLL")}</span>
+        </div>
+        <div>
+          <span>{messages.message}</span>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div>
-      <h1>Chatbox</h1>
       <div className="container">
         <div className="chat-header">
           <h5>You're now chatting with {props.convoOpp}</h5>
         </div>
-        <div className="chat-body">
-          {props.chatbox?.map((messages, index) => {
-              <p>{messages?.message}</p>
-          })}
-        </div>
+        <div className="chat-body">{messageBox}</div>
         <div className="chat-field">
           <br></br>
-          <textarea name="text" cols="50" onChange={(e) => setComment(e.target.value)}/>
-          <button onClick = {handleClick}>Submit</button>
+          <textarea
+            name="text"
+            cols="50"
+            style={{ resize: "none" }}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button onClick={handleClick}>Submit</button>
         </div>
       </div>
     </div>
