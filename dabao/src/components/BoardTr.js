@@ -11,7 +11,7 @@ const Board = () => {
   const [matches, setMatches] = useState(["loading"])
   const [toggleUpdate, settoggleUpdate] = useState(false)
 
-  console.log("logcontext",loggedContext) 
+  // console.log("logcontext",loggedContext) 
   const postcode = loggedContext?.logState?.address.postCode
    useEffect(() => {
     axios
@@ -82,7 +82,7 @@ const Board = () => {
     <Nav>
       <div >
       <table>
-        <tbody>
+        <thead>
           <tr>
             <th>Dabao-Er</th>
             {/* <th>ID </th> */}
@@ -96,6 +96,8 @@ const Board = () => {
             <th>Action</th>
             <th>Status</th>
           </tr>
+        </thead>
+        <tbody>
           {matches?.map((match,index) => {
             
             const slotsAvail = match.maxOrders - match.Orders.length;
@@ -114,11 +116,11 @@ const Board = () => {
               <tr className="bg-emerald-200" key={match._id}>
                 <td>{match.DBER.username}</td>
                 {/* <td>{match.DBER._id}</td> */}
-                <td>{match.dishOrdered?.itemName}</td>
-                <td>${match.dishOrdered?.itemPrice}</td>
-                <td>{match.pickupLocation.street}</td>
-                <td>{match.pickupLocation.postCode}</td>
-                <td>{match.orderLocation.street}</td>
+                <td>{match?.dishOrdered?.itemName}</td>
+                <td>${match?.dishOrdered?.itemPrice}</td>
+                <td>{match?.pickupLocation?.street}</td>
+                <td>{match?.pickupLocation?.postCode}</td>
+                <td>{match?.orderLocation?.street}</td>
                 {/* <td>{match.timeAtPickUp}</td> */}
                 <td>{moment(match.timeAtPickUp).format("lll")}</td>
                 {/* <td>{moment("20010704T120854").format("lll")}</td> */}
