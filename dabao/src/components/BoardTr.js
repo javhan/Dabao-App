@@ -16,7 +16,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import Nav from "./Nav";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import axios from "axios"
 import { LoggedContext } from "../App.js";
 import moment from "moment"
@@ -47,9 +47,6 @@ const theme = createTheme({
     warning: {
       main: '#f3e19a',
     },
-    // secondary: {
-    //   main: '#f44336',
-    // },
   },
 });
 
@@ -92,7 +89,7 @@ function Row(props) {
         <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.postCode}</TableCell>
-        <TableCell align="center">{match?.orderLocation?.street}</TableCell>
+        <TableCell align="center">{match?.orderLocation?.name}</TableCell>
         <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
         <TableCell align="center">{matchProps.slotsAvail}</TableCell>
         <TableCell align="center">{!matchProps.isConfirmedOrder && <button onClick={()=>matchProps.debouncedSavePlus(match)}>+</button>}
@@ -160,8 +157,8 @@ const CollapsibleTable =() => {
     .put(`/match/insert/${match._id}`,{
       DBEE: loggedContext.logState._id,
       isCompleted: false,
-      remarks: "MORE RICE",
-      dishOrdered: { itemName: "Duck Rice", itemPrice: 3.00 },
+      // remarks: "MORE RICE",
+      // dishOrdered: { itemName: "Duck Rice", itemPrice: 3.00 },
     })
     .then(function (response) {
       // handle success
@@ -211,7 +208,7 @@ const CollapsibleTable =() => {
             <StyledTableCell align="center">Dish</StyledTableCell>
             <StyledTableCell align="center">Price($)</StyledTableCell>
             <StyledTableCell align="center">Pickup-Location</StyledTableCell>
-            <StyledTableCell align="center">Poctcode</StyledTableCell>
+            <StyledTableCell align="center">Postcode</StyledTableCell>
             <StyledTableCell align="center">Order-Location</StyledTableCell>
             <StyledTableCell align="center">Pickup-Time</StyledTableCell>
             <StyledTableCell align="center">Avail-Slots</StyledTableCell>
@@ -220,9 +217,6 @@ const CollapsibleTable =() => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))} */}
           {matches.map((match,index) => {
               const slotsAvail = match.maxOrders - match.Orders.length;
             
@@ -241,13 +235,12 @@ const CollapsibleTable =() => {
 
             return <Row key={index} match={match} matchProps={matchProps} />
           })}
-          {/*  */}
         </TableBody>
       </Table>
     </TableContainer>
-    <div><br/><br/>
+    {/* <div><br/><br/>
         <Link to="/dashboard"><button>To Dashboard</button></Link>
-      </div>
+      </div> */}
     </Nav>
   );
           }
