@@ -7,7 +7,9 @@ const UpdateSuccess = () => {
         <Nav>
         <div>
             <h3>Update success!</h3>
-            <Link to ="/"><button className="btstyle">Home</button></Link>
+            <Link to ="/">
+                <button className="btstyle">Home</button>
+            </Link>
         </div>
         </Nav>
     )
