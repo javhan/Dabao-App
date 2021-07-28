@@ -111,7 +111,7 @@ input[type="number"] {
 }
 
 .btstyle {
-  background-color: #f9c906;
+  background-color: #f8efe4;
   transition-duration: 0.4s;
   border-radius: 8px;
   padding: 14px 40px;
@@ -119,7 +119,7 @@ input[type="number"] {
 
 .btstyle:hover {
   cursor: pointer;
-  background-color: #f8efe4;
+  background-color: #f9a406;
 }
 
 #hover:hover {
