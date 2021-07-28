@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
     })
 })
 
-router.get("/:postcode", (req,res) => {
+router.get("/:postalcode", (req,res) => {
     // console.log("postal",req.params.postalcode)
     const searchStr = req.params.postalcode.slice(0,2)
     // console.log(searchStr)
