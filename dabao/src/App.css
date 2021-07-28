@@ -221,3 +221,9 @@ input:-webkit-autofill:active {
 .hawker {
   width: 100%;
 }
+
+fieldset {
+  text-align: left;
+  padding: 10px;
+  
+}

@@ -19,6 +19,7 @@ const SignIn = () => {
       },
     })
       .then((res) => {
+        console.log(res)
         if (res.ok) {
           return res.json();
         }
