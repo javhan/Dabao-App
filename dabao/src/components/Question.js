@@ -10,8 +10,8 @@ const Question = () => {
   const loggedContext = useContext(LoggedContext);
   const history = useHistory();
   const handleSubmit = (event) => {
+      console.log(event.target)
       event.preventDefault()
-      console.log(event.target.shopname.value, event.target.DBpostcode.value )
     fetch("/match", {
       method: "POST",
       body: JSON.stringify({
@@ -28,7 +28,7 @@ const Question = () => {
         },
         orderLocation: {
              street: event.target.shopname.value, 
-             postCode: event.target.DBpostcode.value},
+             postCode: postcode.current.value},
       }),
       headers: {
         "Content-Type": "application/json",

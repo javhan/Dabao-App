@@ -32,7 +32,7 @@ function DBERdash() {
         setDashboard(data);
         console.log("dashboard", data);
       });
-  }, [loggedContext?.logState?._id]);
+  }, [loggedContext?.logState?._id, chatbox]);
 
   const handleChat = (cb, user, order_id) => {
     console.log(cb);
