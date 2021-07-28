@@ -42,7 +42,6 @@ function DBEEdash() {
 
   //Toggle Who you're chatting with
   const handleChat = (cb, user, order_id) => {
-    console.log(cb);
     setChatbox(cb);
     setConvoOpp(user);
     setOrderID(order_id);

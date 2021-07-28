@@ -227,3 +227,12 @@ fieldset {
   padding: 10px;
   
 }
+
+#backLink {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+#backLink:hover {
+  text-decoration: underline;
+}

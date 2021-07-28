@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import EditEvent from "./components/EditEvent"
 import Question from "./components/Question";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
@@ -47,6 +48,7 @@ useEffect(()=> {
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={SignIn} />
             <Route path="/new" component={SignUp} />
+            <PrivateRoute path="/dashboard/edit" component={EditEvent} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/question" component={Question} />
             <PrivateRoute path="/board" component={BoardTr} />

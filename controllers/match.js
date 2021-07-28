@@ -156,6 +156,18 @@ router.put("/remove/:orderId/:dbee", (req, res) => {
   );
 });
 
+// Edit Match Details
+router.put("/order/edit/:id", (req, res)=> {
+  console.log("req body", req.body)
+  console.log("req params", req.params.id)
+  Match.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, userFound) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } console.log("UF", userFound)
+    res.status(200).json(userFound);
+  })
+})
+
 // Testing Route
 router.get("/new", (req, res) => {
   res.send("MATCH NEW PAGE");

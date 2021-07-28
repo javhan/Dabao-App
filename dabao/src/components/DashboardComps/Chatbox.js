@@ -38,7 +38,7 @@ const Chatbox = (props) => {
             style={{ resize: "none" }}
             onChange={(e) => setComment(e.target.value)}
           />
-          <button onClick={handleClick}>Submit</button>
+          <button className="send" onClick={handleClick}>Send</button>
         </div>
       </div>
     </div>
