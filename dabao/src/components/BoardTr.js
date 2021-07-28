@@ -1,4 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext }  from 'react';
+import { withStyles, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import axios from "axios"
@@ -6,12 +22,124 @@ import { LoggedContext } from "../App.js";
 import moment from "moment"
 import debounce from 'lodash.debounce';
 
-const Board = () => {
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+    fontSize: 16,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(4n+1)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+
+const theme = createTheme({
+  palette: {
+    warning: {
+      main: '#f3e19a',
+    },
+    // secondary: {
+    //   main: '#f44336',
+    // },
+  },
+});
+
+const StyledDropDownRow = withStyles((theme) => ({
+  root: {
+      // backgroundColor: theme.palette.info.light,
+      backgroundColor: theme.palette.warning.main,
+    },
+
+}))(TableRow);
+
+
+
+// const useRowStyles = makeStyles({
+//   root: {
+//     '& > *': {
+//       borderBottom: 'unset',
+//     },
+//   },
+// });
+
+function Row(props) {
+  const { match, matchProps } = props;
+  const [open, setOpen] = React.useState(false);
+  // const classes = useRowStyles();
+  // className={classes.root}
+  return (
+    // <React.Fragment>
+    <ThemeProvider theme={theme}>
+      <StyledTableRow >
+        <TableCell  component="th" scope="row">
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell>
+          {match?.DBER?.username}
+        </TableCell>
+        <TableCell align="center">{match?.dishOrdered?.itemName}</TableCell>
+        <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
+        <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
+        <TableCell align="center">{match?.pickupLocation?.postCode}</TableCell>
+        <TableCell align="center">{match?.orderLocation?.street}</TableCell>
+        <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
+        <TableCell align="center">{matchProps.slotsAvail}</TableCell>
+        <TableCell align="center">{!matchProps.isConfirmedOrder && <button onClick={()=>matchProps.debouncedSavePlus(match)}>+</button>}
+                                  {matchProps.isConfirmedOrder && <button onClick={()=>matchProps.debouncedSaveMinus(match)}>-</button>}
+        </TableCell>
+        <TableCell align="center">{matchProps.isConfirmedOrder? "CONFIRMED":matchProps.slotsAvail > 0 ? "AVAIL":"CLOSED"}</TableCell>
+      </StyledTableRow>
+      <StyledDropDownRow>
+        <TableCell  style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={11}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={5}>
+              <Typography variant="h5" gutterBottom component="div">
+                Contacts
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell><strong>Handphone</strong></TableCell>
+                    <TableCell><strong>Email</strong></TableCell>
+                    <TableCell><strong>Address</strong></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                      <TableCell align="left">{match.DBER.contact.hp}</TableCell>
+                      <TableCell align="left">{match.DBER.contact.email}</TableCell>
+                      <TableCell align="left">{match.DBER.address.street}</TableCell>
+                    </TableRow>
+                
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </StyledDropDownRow>
+      </ThemeProvider>
+    // </React.Fragment>
+  
+  );
+}
+
+const CollapsibleTable =() => {
   const loggedContext = useContext(LoggedContext);
   const [matches, setMatches] = useState(["loading"])
   const [toggleUpdate, settoggleUpdate] = useState(false)
 
-  console.log("logcontext",loggedContext) 
+  // console.log("logcontext",loggedContext) 
   const postcode = loggedContext?.logState?.address.postCode
    useEffect(() => {
     axios
@@ -24,9 +152,6 @@ const Board = () => {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function () {
-        // always executed
-      });
   }, [postcode,toggleUpdate]);
 
   const debouncedSavePlus = debounce(nextValue => handleAdd(nextValue), 500)
@@ -65,79 +190,67 @@ const Board = () => {
 
   if(matches[0] === "loading")
     return (<h1>Loading ..... </h1>)
-
-  if(matches?.length === 0) {
-    return (
-      <Nav>
-      <div className="box">
-        {matches.length===0 && <h1>NO Dabao-Er AVAILABLE AT YOUR CURRENT LOCATION</h1>}
-      </div>
-      {/* <div>
-        <Link to="/dashboard">To Dashboard</Link>
-      </div> */}
-      </Nav>
-    )
-  } else {
+  
+    if(matches?.length === 0) {
+      return (
+        <Nav>
+        <div className="box">
+          {<h1>NO Dabao-Er AVAILABLE AT YOUR CURRENT LOCATION</h1>}
+        </div>
+        </Nav>
+      )
+    } else {  
   return (
     <Nav>
-      <div >
-      <table>
-        <tbody>
-          <tr>
-            <th>Dabao-Er</th>
-            {/* <th>ID </th> */}
-            <th>Dish</th>
-            <th>Price</th>
-            <th>Pickup-Location</th>
-            <th>PostCode</th>
-            <th>Order-Location</th>
-            <th>Pickup-Time</th>
-            <th>Avail-Slots</th>
-            <th>Action</th>
-            <th>Status</th>
-          </tr>
-          {matches?.map((match,index) => {
+    <TableContainer component={Paper}>
+      <Table aria-label="collapsible table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell />
+            <StyledTableCell >Dabao-Er</StyledTableCell>
+            <StyledTableCell align="center">Dish</StyledTableCell>
+            <StyledTableCell align="center">Price($)</StyledTableCell>
+            <StyledTableCell align="center">Pickup-Location</StyledTableCell>
+            <StyledTableCell align="center">Poctcode</StyledTableCell>
+            <StyledTableCell align="center">Order-Location</StyledTableCell>
+            <StyledTableCell align="center">Pickup-Time</StyledTableCell>
+            <StyledTableCell align="center">Avail-Slots</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
+            <StyledTableCell align="center">Status</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {/* {rows.map((row) => (
+            <Row key={row.name} row={row} />
+          ))} */}
+          {matches.map((match,index) => {
+              const slotsAvail = match.maxOrders - match.Orders.length;
             
-            const slotsAvail = match.maxOrders - match.Orders.length;
-            
-            let isConfirmedOrder = false;
-            if(match.Orders.length > 0) {
-              match.Orders.forEach(order => {
-                if(order.DBEE === loggedContext.logState._id)
-                  isConfirmedOrder = true;
-              })
-            }
-            if((slotsAvail === 0 && !isConfirmedOrder) || 
-              (loggedContext?.logState?._id === match.DBER._id))
-                return (<></>)
-            return (
-              <tr className="bg-emerald-200" key={match._id}>
-                <td>{match.DBER.username}</td>
-                {/* <td>{match.DBER._id}</td> */}
-                <td>{match.dishOrdered?.itemName}</td>
-                <td>${match.dishOrdered?.itemPrice}</td>
-                <td>{match.pickupLocation?.street}</td>
-                <td>{match.pickupLocation?.postCode}</td>
-                <td>{match.orderLocation?.street}</td>
-                {/* <td>{match.timeAtPickUp}</td> */}
-                <td>{moment(match.timeAtPickUp).format("lll")}</td>
-                {/* <td>{moment("20010704T120854").format("lll")}</td> */}
-                <td>{slotsAvail}</td>
-                <td>{!isConfirmedOrder && <button onClick={()=>debouncedSavePlus(match)}>+</button>}
-                    {isConfirmedOrder && <button onClick={()=>debouncedSaveMinus(match)}>-</button>}</td>
-                <td>{isConfirmedOrder? "CONFIRMED":slotsAvail > 0 ? "AVAIL":"CLOSED"}</td>
-              </tr>
-            );
+              let isConfirmedOrder = false;
+              if(match.Orders.length > 0) {
+                match.Orders.forEach(order => {
+                  if(order.DBEE === loggedContext.logState._id)
+                    isConfirmedOrder = true;
+                })
+              }
+              if((slotsAvail === 0 && !isConfirmedOrder) || 
+                (loggedContext?.logState?._id === match.DBER._id))
+                  return (<></>);
+
+              const matchProps = {slotsAvail,isConfirmedOrder,debouncedSavePlus,debouncedSaveMinus}
+
+            return <Row key={index} match={match} matchProps={matchProps} />
           })}
-        </tbody>
-      </table>
-      </div>
-      <div><br/><br/>
+          {/*  */}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <div><br/><br/>
         <Link to="/dashboard"><button>To Dashboard</button></Link>
       </div>
     </Nav>
   );
-  }
-};
+          }
+}
 
-export default Board;
+export default CollapsibleTable;
