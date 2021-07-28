@@ -12,7 +12,7 @@ const matchSchema = new mongoose.Schema({
       messages: [
         {
           message: String,
-          timePosted: Date,
+          timePosted: {type: Date, default : Date.now},
           user: String,
         },
       ],
@@ -20,7 +20,7 @@ const matchSchema = new mongoose.Schema({
   ],
   pickupLocation: { street: String, postCode: Number },
   timeAtPickUp: Date,
-  orderLocation: { street: String, postCode: Number },
+  orderLocation: { type: mongoose.Schema.Types.ObjectId, ref: "Shop" },
   dishOrdered: { itemName: String, itemPrice: Number },
 }, {timestamps: true});
 

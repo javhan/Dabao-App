@@ -19,17 +19,18 @@ router.get("/DBER/:id", (req, res) => {
     });
 });
 
-
 // Get all match for active as DBEE
 router.get("/DBEE/:id", (req, res) => {
   id = mongoose.Types.ObjectId(req.params.id);
-  Match.find({ "Orders.DBEE": id }, (err, matchFound) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-    }
-    console.log(matchFound);
-    res.status(200).json(matchFound);
-  });
+  Match.find({ "Orders.DBEE": id })
+    .populate({ path: "DBER", model: User })
+    .exec((err, matchFound) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+      }
+      console.log(matchFound);
+      res.status(200).json(matchFound);
+    });
 });
 
 router.get("/", (req, res) => {
@@ -86,6 +87,27 @@ router.post("/", (req, res) => {
   });
 });
 
+//add message
+router.put("/DBEE/message/:orderID/", (req, res) => {
+  console.log(req.params.orderID);
+  console.log(req.body)
+  Match.findOneAndUpdate(
+    {"Orders._id" : req.params.orderID},
+    {$push: {
+      "Orders.$.messages" : req.body
+    } },
+    { new: true },
+    (err, updatedMatch) => {
+      if (err) {
+        console.log(err)
+        res.status(400).json({ error: err.message });
+      }
+      console.log(updatedMatch)
+      res.status(200).json(updatedMatch);
+    }
+  );
+});
+
 // Delete a Match
 // curl -X DELETE http://localhost:<PORT>/match/<id>
 router.delete("/:id", (req, res) => {
@@ -116,7 +138,7 @@ router.put("/insert/:orderId", (req, res) => {
   );
 });
 
-// Remove DBEE from board
+// Remove DBEE from board and dashboard
 router.put("/remove/:orderId/:dbee", (req, res) => {
   console.log("order id", req.params.orderId);
   console.log("order id", req.params.dbee);
@@ -133,22 +155,6 @@ router.put("/remove/:orderId/:dbee", (req, res) => {
     }
   );
 });
-
-// Remove DBEE from dashboard
-// router.put("/remove/:dbee", (req, res) => {
-//   console.log("order id", req.params.dbee);
-//   Match.findByIdAndUpdate(
-//     { Orders: { DBEE: req.params.dbee } },
-//     { $pull: { Orders: { DBEE: req.params.dbee } } },
-//     { new: true },
-//     (err, updatedMatch) => {
-//       if (err) {
-//         res.status(400).json({ error: err.message });
-//       }
-//       res.status(200).json(updatedMatch);
-//     }
-//   );
-// });
 
 // Testing Route
 router.get("/new", (req, res) => {

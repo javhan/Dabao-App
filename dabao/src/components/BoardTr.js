@@ -116,9 +116,9 @@ const Board = () => {
                 {/* <td>{match.DBER._id}</td> */}
                 <td>{match.dishOrdered?.itemName}</td>
                 <td>${match.dishOrdered?.itemPrice}</td>
-                <td>{match.pickupLocation.street}</td>
-                <td>{match.pickupLocation.postCode}</td>
-                <td>{match.orderLocation.street}</td>
+                <td>{match.pickupLocation?.street}</td>
+                <td>{match.pickupLocation?.postCode}</td>
+                <td>{match.orderLocation?.street}</td>
                 {/* <td>{match.timeAtPickUp}</td> */}
                 <td>{moment(match.timeAtPickUp).format("lll")}</td>
                 {/* <td>{moment("20010704T120854").format("lll")}</td> */}
