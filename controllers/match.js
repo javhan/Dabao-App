@@ -52,18 +52,25 @@ router.get("/id/:id", (req, res) => {
   });
 });
 
+
+
 // Get all match under same poscode
 // curl http://localhost:<PORT>/users/poscode/<poscode>
 router.get("/postcode/:postcode", async (req, res) => {
   // console.log(req.params.postcode)
+  // const searchStr = req.params.postcode.slice(0,2)
+  const searchNumLower = parseInt(req.params.postcode.slice(0,2))*10000;
+  const searchNumUpper = searchNumLower + 10000;
+  console.log(searchNumLower)
+  // { "$gte": 87, "$lt": 88 }
   const match = await Match.find({
-    "pickupLocation.postCode": req.params.postcode,
+    "pickupLocation.postCode": { "$gte": searchNumLower, "$lt": searchNumUpper }
   })
     .populate({ path: "DBER", model: User })
     .exec((err, data) => {
-      // console.log("match",data)
+      console.log("match",data)
       res.status(200).json(data);
-      // console.log(err)
+      console.log(err)
     });
   // console.log("match",match)
   // res.status(200).json(match)
