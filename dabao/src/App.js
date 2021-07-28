@@ -22,7 +22,7 @@ const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
   return <Route {...rest} render={(props) => (
     logState !== undefined
     ? <Component {...props} handleChildFunc={handleChildFunc}/>
-    :<Redirect to='/login'/>  
+    :<Redirect to={{pathname: '/login', state:{ from: props.location} }}/>  
   )}
   />
 }
