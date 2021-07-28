@@ -55,7 +55,7 @@ const Nav = (props) => {
           <div>
             <div className="navLeft">Welcome, {loggedContext.logState.username}! </div>
           </div>
-          <div className="navRight" onClick={handleSubmit}>
+          <div className="navRight" id="hover" onClick={handleSubmit}>
             Log Out
           </div>
           <div className="navRight">

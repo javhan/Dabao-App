@@ -6,9 +6,9 @@ import SignUp from "./components/SignUp";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Question from "./components/Question";
-// import Board from "./components/BoardTr";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
+import UpdateSuccess from "./components/UpdateSuccess";
 import BoardTr from "./components/BoardTr";
 import "tailwindcss/tailwind.css"
 
@@ -16,6 +16,16 @@ export const LoggedContext = createContext();
 
 function App() {
   const [logState, setLogState] = useState();
+console.log(logState)
+
+const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
+  return <Route {...rest} render={(props) => (
+    logState !== undefined
+    ? <Component {...props} handleChildFunc={handleChildFunc}/>
+    :<Redirect to='/login'/>  
+  )}
+  />
+}
 
   useEffect(() => {
     fetch("/sessions")
@@ -37,11 +47,12 @@ useEffect(()=> {
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={SignIn} />
             <Route path="/new" component={SignUp} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/question" component={Question} />
-            <Route path="/board" component={BoardTr} />
-            <Route path="/profile" component={Profile} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/question" component={Question} />
+            <PrivateRoute path="/board" component={BoardTr} />
+            <PrivateRoute path="/profile" component={Profile} />
             <Route path="/signupsuccess" component={SignUpSuccess} />
+            <PrivateRoute path="/updatesuccess" component={UpdateSuccess} />
             <Redirect to="/" />
           </Switch>
         </main>
