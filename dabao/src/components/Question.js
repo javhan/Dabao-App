@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import Nav from "./Nav";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { LoggedContext } from "../App.js";
+import Shop from "./Shop"
 
 const Question = () => {
   const loggedContext = useContext(LoggedContext);
@@ -17,9 +18,6 @@ const Question = () => {
           postCode: event.target.postcode.value
         },
         timeAtPickUp: event.target.timeAtPickUp.value,
-        orderLocation: { 
-            street: event.target.eating.value 
-        },
         dishOrdered: { 
             itemName: event.target.food.value,
             itemPrice: event.target.price.value
@@ -41,28 +39,21 @@ const Question = () => {
         <h1>DBer Questionnaire</h1>
         <form onSubmit={handleSubmit}>
         <fieldset>
+            <legend>Food</legend>
             <legend>What are you eating?</legend>
             <input type="text" name="food" />
             <legend>Whats the price?</legend>
             <input type="number" name="price" min="0" step=".01"/>
           </fieldset>
           <br />
-          <fieldset>
-            <legend>Where are you ordering from?</legend>
-            <input type="text" name="eating" />
-          </fieldset>
+          <Shop />
           <br />
           <fieldset>
+          <legend>Pick-Up</legend>
             <legend>Where to Pick-up?</legend>
             <input type="text" name="pickup" />
-          </fieldset>
-          <br />
-          <fieldset>
-            <legend>Postal Code of Pick-up</legend>
+            <legend>Postal Code of Pick-up?</legend>
             <input type="text" name="postcode" />
-          </fieldset>
-          <br />
-          <fieldset>
             <legend>Pick-Up Time!</legend>
             <input type="datetime-local" name="timeAtPickUp" />
           </fieldset>

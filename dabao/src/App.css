@@ -149,3 +149,8 @@ th {
 td {
   border-top: 1px solid black;
 }
+
+select {
+  width: 100%;
+  text-align: center;
+}

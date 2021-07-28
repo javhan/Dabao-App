@@ -8,7 +8,9 @@ const UpdateSuccess = () => {
         <div>
             <h3>Update success!</h3>
             <Link to ="/">
-                <button className="btstyle">Home</button>
+                <button className="btstyle">
+                    Home
+                    </button>
             </Link>
         </div>
         </Nav>
