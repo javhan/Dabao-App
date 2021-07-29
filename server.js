@@ -14,10 +14,10 @@ const mongodbURI = process.env.MONGODB_URI;
 //middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "./dabao/build")));
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "./dabao/build")));
 app.use(
   session({
     secret: process.env.SECRET,
@@ -58,26 +58,26 @@ const Match = require("./models/match.model.js")
 //   });
 // });
 
-// app.get("/seedShops", (req, res) => {
-//   Shop.create(seedShop, (err, createdShops) => {
-//     if (err) {
-//       res.status(400).json({ error: err.message });
-//     } else {
-//       res.status(200).json(createdShops);
-//     }
-//     console.log(createdShops);
-//   });
-// });
-// app.get("/seedMatch", (req, res) => {
-//   Match.create(seedMatch, (err, createdMatch) => {
-//     if (err) {
-//       res.status(400).json({ error: err.message });
-//     } else {
-//       res.status(200).json(createdMatch);
-//     }
-//     console.log(createdMatch);
-//   });
-// });
+app.get("/seedShops", (req, res) => {
+  Shop.create(seedShop, (err, createdShops) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } else {
+      res.status(200).json(createdShops);
+    }
+    console.log(createdShops);
+  });
+});
+app.get("/seedMatch", (req, res) => {
+  Match.create(seedMatch, (err, createdMatch) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } else {
+      res.status(200).json(createdMatch);
+    }
+    console.log(createdMatch);
+  });
+});
 
 //Routes
 app.get("/", (req, res) => {
