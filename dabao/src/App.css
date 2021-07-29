@@ -228,6 +228,14 @@ fieldset {
   
 }
 
+#backLink {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+#backLink:hover {
+  text-decoration: underline;
+}
 .center {
   font-size: 20px;
   position: absolute;

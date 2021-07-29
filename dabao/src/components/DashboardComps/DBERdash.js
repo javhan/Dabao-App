@@ -1,16 +1,18 @@
 import React, { useEffect, useContext, useState } from "react";
 import { LoggedContext } from "../../App.js";
+import { Link } from "react-router-dom";
 import Chatbox from "./Chatbox";
 import "../Dashboard.css";
 import moment from "moment";
 
 function DBERdash() {
   const [dashboard, setDashboard] = useState([]);
-  const [chatbox, setChatbox] = useState();
+  const [chatbox, setChatbox] = useState([]);
   const loggedContext = useContext(LoggedContext);
   const [convoOpp, setConvoOpp] = useState("");
   const [orderID, setOrderID] = useState();
 
+  // Delete the Order from DBER dashboard
   const handleDeleteJob = (id) => {
     fetch(`/match/${id}`, {
       method: "DELETE",
@@ -35,16 +37,13 @@ function DBERdash() {
   }, [loggedContext?.logState?._id, chatbox]);
 
   const handleChat = (cb, user, order_id) => {
-    console.log(cb);
-    console.log(user);
-    console.log(order_id)
     setChatbox(cb);
     setConvoOpp(user);
     setOrderID(order_id);
   };
   // Sending Message in Chatbox
   const sendMessage = (message) => {
-    if (message === "") {
+    if (message === "" || convoOpp === "") {
       return;
     }
     fetch(`/match/message/${orderID}`, {
@@ -83,14 +82,27 @@ function DBERdash() {
         <br />
         <span>Pickup Time: {moment(data.timeAtPickUp).format("LLL")}</span>
         <br />
-        <button>Edit</button>
+        <Link
+          to={{
+            pathname: "/dashboard/edit",
+            props: {
+              data : data,
+            }
+          }}
+        >
+          <button>Edit</button>
+        </Link>
         <button onClick={() => handleDeleteJob(data._id)}>Delete</button>
         <ul>
           {data.Orders.map((inner, indexIn) => (
             <li key={indexIn}>
               {inner?.DBEE?.username}
               <span className="chat">
-                <button onClick={() => handleChat(inner?.messages, inner?.DBEE?.username, inner?._id)}>
+                <button
+                  onClick={() =>
+                    handleChat(inner.messages, inner.DBEE.username, inner._id)
+                  }
+                >
                   Chat
                 </button>
               </span>
