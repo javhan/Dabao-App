@@ -77,7 +77,7 @@ function Row(props) {
         <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
         <TableCell align="center"><a href={`https://google.com/maps/dir/${loggedContext.logState?.address?.postCode}/${match?.pickupLocation?.postCode}`} target="_blank">{match?.pickupLocation?.postCode}</a></TableCell>
-        <TableCell align="center">{match?.orderLocation?.name}</TableCell>
+        <TableCell align="center">{match?.orderLocation?.street}</TableCell>
         <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
         <TableCell align="center">{matchProps.slotsAvail}</TableCell>
         <TableCell align="center">
