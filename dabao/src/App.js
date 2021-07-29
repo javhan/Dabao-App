@@ -11,7 +11,6 @@ import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
 import UpdateSuccess from "./components/UpdateSuccess";
 import Board from "./components/Board";
-import "tailwindcss/tailwind.css"
 
 export const LoggedContext = createContext();
 
