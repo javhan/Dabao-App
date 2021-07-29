@@ -41,6 +41,7 @@ const Chatbox = (props) => {
         <div className="chat-field">
           <br></br>
           <textarea
+            disabled={(props.convoOpp === "" ? true : false)}
             name="text"
             cols="50"
             style={{ resize: "none" }}

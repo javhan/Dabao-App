@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LoggedContext } from "../App.js";
 import Nav from "./Nav";
@@ -7,6 +7,8 @@ import setPos from '../map'
 const SignIn = () => {
   const loggedContext = useContext(LoggedContext);
   let history = useHistory();
+  const [userNotFound, setUserNotFound] = useState(false)
+  const [passwordWrong, setPasswordWrong] = useState(false)
 
   // const setPos = () => {
   //   const successCallback = (position) => {
@@ -25,6 +27,8 @@ const SignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setUserNotFound(false)
+    setPasswordWrong(false)
     const username = event.target.elements.username.value;
     const password = event.target.elements.password.value;
     fetch("/sessions", {
@@ -36,16 +40,21 @@ const SignIn = () => {
     })
       .then((res) => {
         console.log(res)
-        if (res.ok) {
+        if (res.status === 200) {
           return res.json();
         }
-        throw new Error("Error in network");
+        else if(res.status === 409) {
+          setUserNotFound(true)
+        } else if (res.status === 401) {
+          setPasswordWrong(true)
+        }
       })
       .then((resJson) => {
-        setPos(loggedContext.setCurrentPos)
-        loggedContext.setCurrentPos(null)
-        loggedContext.setLogState(resJson);
-        history.push("/home");
+        if (resJson) {
+          setPos(loggedContext.setCurrentPos)
+          loggedContext.setLogState(resJson);
+          history.push("/home")
+        }
       }
       );
   };
@@ -65,6 +74,8 @@ const SignIn = () => {
           <button className="btstyle">Login</button>
         </form>
       </div>
+        {userNotFound && <h3>User Not Found</h3>}
+        {passwordWrong && <h3>User/Password Wrong!</h3>}
     </Nav>
   );
 };

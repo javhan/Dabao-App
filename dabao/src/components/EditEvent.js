@@ -1,34 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./Nav";
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom";
 
 function EditEvent(prop) {
-    let history = useHistory();
+  let history = useHistory();
+  const [checkTime, setCheckTime] = useState(false)
 
   const handleSubmit = (event) => {
-      event.preventDefault()
-      if (event.target.street.value === "" || event.target.postCode.value === "" || event.target.timeAtPickUp.value === "" ) {
-          return;
-      }
+    event.preventDefault();
+    setCheckTime(false);
+    let timeCheck = new Date(event.target.timeAtPickUp.value).getTime()
+    if (timeCheck < Date.now()) {
+      setCheckTime(true);
+      return
+    }
 
-      fetch(`/match/order/edit/${prop.location.props.data._id}`, {
-          method: "PUT",
-          body: JSON.stringify({
-              pickupLocation: {
-                  street: event?.target.street.value,
-                  postCode: event?.target.postCode.value
-              },
-              timeAtPickUp : event?.target.timeAtPickUp.value
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-      })
+    fetch(`/match/order/edit/${prop.location.props.data._id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        pickupLocation: {
+          street: event?.target.street.value,
+          postCode: event?.target.postCode.value,
+        },
+        timeAtPickUp: event?.target.timeAtPickUp.value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         return res.json();
       })
       .then((resJson) => {
-        console.log(resJson);
       });
     history.push("/dashboard");
   };
@@ -69,6 +72,7 @@ function EditEvent(prop) {
               defaultValue={prop.location.props.data.timeAtPickUp}
             />
             <label>Time At Pickup</label>
+            {checkTime && <span id="timeCheck">Please Check Time</span>}
           </div>
           <br />
           <Link to="/dashboard">
