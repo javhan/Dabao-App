@@ -20,6 +20,7 @@ import axios from "axios"
 import { LoggedContext } from "../App.js";
 import moment from "moment"
 import debounce from 'lodash.debounce';
+// import GetPos from '../map'
 // import InitMap from '../map.js'
 
 const StyledTableCell = withStyles((theme) => ({

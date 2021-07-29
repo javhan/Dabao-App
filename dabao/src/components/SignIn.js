@@ -2,25 +2,26 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoggedContext } from "../App.js";
 import Nav from "./Nav";
+import setPos from '../map'
 
 const SignIn = () => {
   const loggedContext = useContext(LoggedContext);
   let history = useHistory();
 
-  const setPos = () => {
-    const successCallback = (position) => {
-      // console.log(position);
-      console.log(position.coords.latitude)
-      console.log(position.coords.longitude)
-      loggedContext.setCurrentPos({lat:position.coords.latitude, long:position.coords.longitude})
-    }
+  // const setPos = () => {
+  //   const successCallback = (position) => {
+  //     // console.log(position);
+  //     console.log(position.coords.latitude)
+  //     console.log(position.coords.longitude)
+  //     loggedContext.setCurrentPos({lat:position.coords.latitude, long:position.coords.longitude})
+  //   }
 
-    const errorCallback = (error) => {
-      console.error(error)
-    }
+  //   const errorCallback = (error) => {
+  //     console.error(error)
+  //   }
     
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
-  }
+  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +42,7 @@ const SignIn = () => {
         throw new Error("Error in network");
       })
       .then((resJson) => {
-        setPos()
+        setPos(loggedContext.setCurrentPos)
         loggedContext.setLogState(resJson);
         history.push("/home");
       });

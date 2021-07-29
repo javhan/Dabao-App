@@ -11,7 +11,8 @@ import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
 import UpdateSuccess from "./components/UpdateSuccess";
 import Board from "./components/Board";
-import "tailwindcss/tailwind.css"
+import setPos from "./map"
+// import "tailwindcss/tailwind.css"
 
 export const LoggedContext = createContext();
 
@@ -34,7 +35,10 @@ const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
   useEffect(() => {
     fetch("/sessions")
     .then((res) => res.json())
-    .then((data) => setLogState(data))
+    .then((data) => {
+      if(data)
+        setPos(setCurrentPos)
+      setLogState(data)})
   }, [])
 
   const onOff = { logState, setLogState, currentPos, setCurrentPos };
