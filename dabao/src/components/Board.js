@@ -76,7 +76,7 @@ function Row(props) {
         <TableCell align="center">{match?.dishOrdered?.itemName}</TableCell>
         <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
-        <TableCell align="center"><a href={`https://google.com/maps/dir/${loggedContext.logState?.address?.postCode}/${match?.pickupLocation?.postCode}`} target="_blank">{match?.pickupLocation?.postCode}</a></TableCell>
+        <TableCell align="center"><a href={`https://google.com/maps/dir/${loggedContext?.currentPos?.postcode}/${match?.pickupLocation?.postCode}`} target="_blank">{match?.pickupLocation?.postCode}</a></TableCell>
         <TableCell align="center">{match?.orderLocation?.street}</TableCell>
         <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
         <TableCell align="center">{matchProps.slotsAvail}</TableCell>
@@ -186,7 +186,7 @@ const CollapsibleTable = () => {
   }, [addrPostcode, gpsPostcode, loggedContext.logState._id, toggleUpdate]);
 
 
-  const debouncedSavePlus = debounce((nextValue) => handleAdd(nextValue), 500);
+  const debouncedSavePlus = debounce((nextValue) => handleAdd(nextValue), 1000);
   const handleAdd = (match) => {
     axios
       .put(`/match/insert/${match._id}`, {
@@ -205,7 +205,7 @@ const CollapsibleTable = () => {
 
   const debouncedSaveMinus = debounce(
     (nextValue) => handleMinus(nextValue),
-    500
+    1000
   );
   const handleMinus = (match) => {
     console.log("minus");
