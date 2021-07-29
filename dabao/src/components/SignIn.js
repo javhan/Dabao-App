@@ -43,6 +43,7 @@ const SignIn = () => {
       })
       .then((resJson) => {
         setPos(loggedContext.setCurrentPos)
+        loggedContext.setCurrentPos(null)
         loggedContext.setLogState(resJson);
         history.push("/home");
       }

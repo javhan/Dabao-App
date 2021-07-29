@@ -14,11 +14,14 @@ const getPostcode = (lat,long, setCurrentPos) => {
     axios.get(URL)
     .then(function (response) {
       console.log("MAP DATA",response.data);
-      console.log("Poscode6",response.data.results[0].address_components[6]?.long_name)
-      console.log("Poscode5",response.data.results[0].address_components[5]?.long_name)
-      const postcode6 = response.data.results[0].address_components[6]?.long_name;
-      const postcode5 = response.data.results[0].address_components[5]?.long_name;
-      const postcode = postcode6 === undefined ? postcode5:postcode6
+      const length = response.data.results[0].address_components.length
+      const postcode = response.data.results[0].address_components[length-1].long_name
+
+    //   console.log("Poscode6",response.data.results[0].address_components[6]?.long_name)
+    //   console.log("Poscode5",response.data.results[0].address_components[5]?.long_name)
+    //   const postcode6 = response.data.results[0].address_components[6]?.long_name;
+    //   const postcode5 = response.data.results[0].address_components[5]?.long_name;
+    //   const postcode = postcode6 === undefined ? postcode5:postcode6
       setCurrentPos({lat,long,postcode})
     })
     .catch(function (error) {
