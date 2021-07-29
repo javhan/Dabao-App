@@ -60,7 +60,7 @@ label {
   height: auto;
   border: 1px solid black;
   margin: auto;
-  padding: 40px 0px 0px;
+  padding: 40px 0px 20px;
   box-shadow: 5px 5px #8888;
   border-radius: 25px;
   padding: 40px;
@@ -71,12 +71,16 @@ label {
 
 .SignUpForm {
   width: 300px;
-  height: 320px;
+  height: auto;
   border: 1px solid black;
   margin: auto;
-  padding: 20px 0px 20px;
+  padding: 40px 0px 20px;
   box-shadow: 5px 5px #8888;
   border-radius: 25px;
+  padding: 40px;
+  box-sizing: border-box;
+  transform: translate (-50%, -50%);
+  background-color: #f9c906;
 }
 
 .flex {
@@ -90,7 +94,21 @@ label {
   padding: 50px;
 }
 
+.flex-child2 {
+  flex: 1;
+  border: 1px solid black;
+  padding: 50px;
+}
+
+.icon {
+  padding-top: 15%;
+}
+
 .flex-child:hover {
+  background-color: #f9c906;
+}
+
+.flex-child2:hover {
   background-color: #f9c906;
 }
 
@@ -101,6 +119,8 @@ label {
   margin: 50px auto;
   overflow-y: auto;
   background-color: #f9c906;
+  padding: 0px 0px 20px;
+
 }
 
 #greeting {
@@ -225,7 +245,11 @@ input:-webkit-autofill:active {
 fieldset {
   text-align: left;
   padding: 10px;
-  
+}
+
+legend {
+  font-style: oblique;
+  font-weight: bold;
 }
 
 #backLink {
