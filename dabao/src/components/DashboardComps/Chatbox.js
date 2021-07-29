@@ -7,6 +7,7 @@ const Chatbox = (props) => {
 
   const handleClick = () => {
     props.sendMessage(comment, props.convoOpp?._id);
+    setComment("")
   };
 
   const style = (index) => {
@@ -45,6 +46,7 @@ const Chatbox = (props) => {
             name="text"
             cols="50"
             style={{ resize: "none" }}
+            value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
           <button className="send" onClick={handleClick}>Send</button>
