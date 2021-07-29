@@ -19,7 +19,7 @@ const Chatbox = (props) => {
 
   const messageBox = props.chatbox?.map((messages, index) => {
     return (
-      <div className="messageCard" key="index" style={style(index)}>
+      <div className="messageCard" key={index} style={style(index)}>
         <div>
           <span>{messages.user}</span>
           <span id="timestamp">{moment(messages.timePosted).format("LLL")}</span>

@@ -60,6 +60,7 @@ const StyledDropDownRow = withStyles((theme) => ({
 function Row(props) {
   const { index, match, matchProps } = props;
   const [open, setOpen] = React.useState(false);
+  const loggedContext = useContext(LoggedContext);
   // const classes = useRowStyles();
   // className={classes.root}
   return (
@@ -79,11 +80,9 @@ function Row(props) {
         <TableCell align="center">{match?.dishOrdered?.itemName}</TableCell>
         <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
-        <TableCell align="center">{match?.pickupLocation?.postCode}</TableCell>
-        <TableCell align="center">{match?.orderLocation?.street}</TableCell>
-        <TableCell align="center">
-          {moment(match.timeAtPickUp).format("lll")}
-        </TableCell>
+        <TableCell align="center"><a href={`https://google.com/maps/dir/${loggedContext.logState?.address?.postCode}/${match?.pickupLocation?.postCode}`} target="_blank">{match?.pickupLocation?.postCode}</a></TableCell>
+        <TableCell align="center">{match?.orderLocation?.name}</TableCell>
+        <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
         <TableCell align="center">{matchProps.slotsAvail}</TableCell>
         <TableCell align="center">
           {!matchProps.isConfirmedOrder && (
