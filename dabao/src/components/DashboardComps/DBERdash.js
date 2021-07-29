@@ -11,6 +11,7 @@ function DBERdash() {
   const loggedContext = useContext(LoggedContext);
   const [convoOpp, setConvoOpp] = useState("");
   const [orderID, setOrderID] = useState();
+  const [toggle, setToggle] = useState([]);
 
   // Delete the Order from DBER dashboard
   const handleDeleteJob = (id) => {
@@ -68,47 +69,78 @@ function DBERdash() {
     });
   };
 
-  const handleEdit = () => {
-    console.log("Edit");
+  const toggleShown = (id) => {
+    const shownState = toggle.slice();
+    const index = shownState.indexOf(id);
+    if (index >= 0) {
+      shownState.splice(index, 1);
+      setToggle(shownState);
+    } else {
+      shownState.push(id);
+      setToggle(shownState);
+    }
   };
 
   const activeJobs = dashboard.map((data, index) => {
     return (
       <div key={index}>
-        <span>
-          Pickup Point: {data.pickupLocation.street},{" "}
-          {data.pickupLocation.postCode}
-        </span>
-        <br />
-        <span>Pickup Time: {moment(data.timeAtPickUp).format("LLL")}</span>
-        <br />
-        <Link
-          to={{
-            pathname: "/dashboard/edit",
-            props: {
-              data : data,
-            }
-          }}
-        >
-          <button>Edit</button>
-        </Link>
-        <button onClick={() => handleDeleteJob(data._id)}>Delete</button>
-        <ul>
-          {data.Orders.map((inner, indexIn) => (
-            <li key={indexIn}>
-              {inner?.DBEE?.username}
-              <span className="chat">
-                <button
-                  onClick={() =>
-                    handleChat(inner.messages, inner.DBEE.username, inner._id)
-                  }
-                >
-                  Chat
-                </button>
-              </span>
-            </li>
+        <tr>
+          <td>
+            {data?.dishOrdered?.itemName} - ${data?.dishOrdered?.itemPrice}
+          </td>
+          <td>
+            {data.orderLocation.street}, {data.orderLocation.postCode}
+          </td>
+          <td>
+            {data.pickupLocation.street}, {data.pickupLocation.postCode}
+          </td>
+          <td>{moment(data.timeAtPickUp).format("LLL")}</td>
+          <td>
+            <Link
+              to={{
+                pathname: "/dashboard/edit",
+                props: {
+                  data: data,
+                },
+              }}
+            >
+              <button>Edit</button>
+            </Link>
+            <button onClick={() => handleDeleteJob(data._id)}>Delete</button>
+          </td>
+          <td>
+            <button onClick={() => toggleShown(data._id)}>
+              Toggle Details
+            </button>
+          </td>
+        </tr>
+        {toggle.includes(data._id) &&
+          data.Orders.map((inner, indexIn) => (
+            <>
+              <tr className="innerHeaders">
+                <th>DBEE</th>
+                <th>Contact</th>
+              </tr>
+              <tr key={indexIn} className="innerHeaders">
+                <td>{inner?.DBEE?.username}</td>
+                <td>
+                  <span className="chat">
+                    <button
+                      onClick={() =>
+                        handleChat(
+                          inner.messages,
+                          inner.DBEE.username,
+                          inner._id
+                        )
+                      }
+                    >
+                      Chat
+                    </button>
+                  </span>
+                </td>
+              </tr>
+            </>
           ))}
-        </ul>
       </div>
     );
   });
@@ -117,7 +149,19 @@ function DBERdash() {
     <div className="holder">
       <div>
         <h2>Jobs</h2>
-        <div className="jobDetails">{activeJobs}</div>
+        <table className="styled-table">
+          <thead>
+            <tr>
+              <th>Dish</th>
+              <th>Ordered From</th>
+              <th>Pickup Point</th>
+              <th>Pickup Time</th>
+              <th>Actions</th>
+              <th>Toggle</th>
+            </tr>
+          </thead>
+          <tbody>{activeJobs}</tbody>
+        </table>
       </div>
       <div>
         <Chatbox
