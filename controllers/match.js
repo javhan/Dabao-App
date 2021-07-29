@@ -56,16 +56,23 @@ router.get("/id/:id", (req, res) => {
 
 // Get all match under same poscode
 // curl http://localhost:<PORT>/users/poscode/<poscode>
-router.get("/postcode/:postcode", async (req, res) => {
+router.get("/postcode/:postcode1/", async (req, res) => {
   // console.log(req.params.postcode)
   // const searchStr = req.params.postcode.slice(0,2)
-  const searchNumLower = parseInt(req.params.postcode.slice(0,2))*10000;
-  const searchNumUpper = searchNumLower + 10000;
-  console.log(searchNumLower)
+  const searchNumLower1 = parseInt(req.params.postcode1.slice(0,2))*10000;
+  const searchNumUpper1 = searchNumLower1 + 10000;
+  // console.log(searchNumLower)
+  // const searchNumLower2 = parseInt(req.params.postcode2.slice(0,2))*10000;
+  // const searchNumUpper2 = searchNumLower2 + 10000;
   // { "$gte": 87, "$lt": 88 }
-  const match = await Match.find({
-    "pickupLocation.postCode": { "$gte": searchNumLower, "$lt": searchNumUpper }
-  })
+  // const match = await 
+  Match.find({"pickupLocation.postCode": { "$gte": searchNumLower1, "$lt": searchNumUpper1}})
+  // Match.find(
+  // {"pickupLocation.postCode": { "$gte": searchNumLower1, "$lt": searchNumUpper1,
+  //   "$gte": searchNumLower2, "$lt": searchNumUpper2}})
+//  Match.find(
+//   {"pickupLocation.postCode": {$in: [{ "$gte": searchNumLower1, "$lt": searchNumUpper1},
+//     {"$gte": searchNumLower2, "$lt": searchNumUpper2}]}})
     .populate({ path: "DBER", model: User })
     .exec((err, data) => {
       console.log("match",data)
