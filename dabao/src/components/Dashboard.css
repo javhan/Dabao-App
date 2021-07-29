@@ -25,7 +25,8 @@ li {
   text-align: left;
   padding-left: 5%;
   padding-right: 5%;
-  margin-bottom: 5%
+  padding-bottom: 10px;
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
 }
 
 #timestamp {
@@ -49,13 +50,15 @@ li {
   padding-left: 10px
 }
 
-.messageCard {
 
-}
 
 .send {
+  position: relative;
   margin-left: 10px;
-  margin-bottom: 20px;
+  margin-right: 10px;
+  top: -15px;
+  height: 40px;
+  background-color: #FFFACD;
 }
 
 .chat-field {
@@ -75,9 +78,70 @@ li {
   position: relative;
   top: 0;
   transition: top ease 0.5s;
+  border-radius: 5px;
 }
 
 .selection:hover {
   top: -5px;
-  background-color: yellow;
+  background-color: #f9c906;
 }
+
+.selection:active {
+  background-color: #f9c906;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #f9c906;
+  color: black;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody {
+  height: 360px;
+  background-color: #f9c906;
+  overflow-y: auto;
+  overflow-x: hidden
+}
+
+.styled-table tbody tr {
+  height: 20px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  height: 20px;
+}
+
+.styled-table tbody tr {
+  background-color: #f3f3f3;
+}
+
+.innerHeaders th, .innerHeaders td {
+  background-color: white;
+}
+
+.styled-table thead tr, .styled-table tbody tr {
+  display: table;
+  width: 750px;
+  table-layout: fixed;
+}
+
+button {
+  background-color: #f9c906;
+  margin: 2px;
+  border-radius: 5px;
+  border-color: #f9c906;
+}
+

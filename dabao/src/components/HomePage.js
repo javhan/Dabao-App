@@ -10,16 +10,14 @@ const HomePage = () => {
           <div >
             <h1 className="DabaoLeft">Going Out To Dabao?</h1>
             <img
-              className="icon"
               alt=""
               src="https://i.imgur.com/jOQsDlZ.png"
             />
           </div>
         </Link>
-        <Link to="/board" className="flex-child">
-          <div >
+        <Link to="/board" className="flex-child2">
+          <div className="icon">
             <img
-              className="icon"
               alt=""
               src="https://i.imgur.com/omGzAkg.png"
             />

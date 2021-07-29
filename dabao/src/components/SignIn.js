@@ -45,7 +45,8 @@ const SignIn = () => {
         setPos(loggedContext.setCurrentPos)
         loggedContext.setLogState(resJson);
         history.push("/home");
-      });
+      }
+      );
   };
   return (
     <Nav>

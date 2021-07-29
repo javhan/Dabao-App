@@ -12,7 +12,6 @@ import SignUpSuccess from "./components/SignUpSuccess";
 import UpdateSuccess from "./components/UpdateSuccess";
 import Board from "./components/Board";
 import setPos from "./map"
-// import "tailwindcss/tailwind.css"
 
 export const LoggedContext = createContext();
 
