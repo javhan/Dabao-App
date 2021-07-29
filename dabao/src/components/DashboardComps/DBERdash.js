@@ -83,8 +83,8 @@ function DBERdash() {
 
   const activeJobs = dashboard.map((data, index) => {
     return (
-      <div key={index}>
-        <tr>
+      <React.Fragment key ={index}>
+        <tr key={index}>
           <td>
             {data?.dishOrdered?.itemName} - ${data?.dishOrdered?.itemPrice}
           </td>
@@ -141,7 +141,7 @@ function DBERdash() {
               </tr>
             </>
           ))}
-      </div>
+      </React.Fragment>
     );
   });
 

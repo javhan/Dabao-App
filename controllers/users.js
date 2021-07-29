@@ -23,15 +23,21 @@ router.get("/", (req, res) => {
   });
 });
 
-router.put("/edit/:id", (req, res)=> {
-  console.log("req body", req.body)
-  User.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, userFound) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-    } console.log(userFound)
-    res.status(200).json(userFound);
-  })
-})
+router.put("/edit/:id", (req, res) => {
+  console.log("req body", req.body);
+  User.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, userFound) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+      }
+      console.log(userFound);
+      res.status(200).json(userFound);
+    }
+  );
+});
 
 // Get a single user by ID
 // curl http://localhost:<PORT>/users/id/<id>
@@ -47,7 +53,7 @@ router.get("/id/:id", (req, res) => {
 // Get all users under same poscode
 // curl http://localhost:<PORT>/users/poscode/<poscode>
 router.get("/postcode/:postcode", (req, res) => {
-  User.find({ 'address.postCode':req.params.postcode }, (err, userFound) => {
+  User.find({ "address.postCode": req.params.postcode }, (err, userFound) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
@@ -59,8 +65,7 @@ router.get("/postcode/:postcode", (req, res) => {
 // curl -X POST -H "Content-Type: application/json" -d
 // '{"username":"TEST 123","password":"ga123"}' http://localhost:<PORT>/users
 router.post("/", (req, res) => {
-  console.log("body",req.body)
-
+  console.log("body", req.body);
   req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync(10)
