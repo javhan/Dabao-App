@@ -8,9 +8,15 @@ import Option from "./Option";
 const Question = () => {
   const loggedContext = useContext(LoggedContext);
   const history = useHistory();
+  const [checkTime, setCheckTime] = useState(false)
+
   const handleSubmit = (event) => {
-    console.log(event.target);
     event.preventDefault();
+    let timeCheck = new Date(event.target.timeAtPickUp.value).getTime()
+    if (timeCheck < Date.now()) {
+      setCheckTime(true);
+      return
+    }
     fetch("/match", {
       method: "POST",
       body: JSON.stringify({
@@ -118,6 +124,7 @@ const Question = () => {
             </div>
             <legend>Pick-Up Time!</legend>
             <input type="datetime-local" name="timeAtPickUp" required />
+            {checkTime && <span id="timeCheck">Please Check Time</span>}
           </fieldset>
           <br />
           <button className="btstyle">Submit</button>

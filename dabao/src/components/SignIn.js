@@ -53,6 +53,7 @@ const SignIn = () => {
         if (resJson) {
           setPos(loggedContext.setCurrentPos)
           loggedContext.setLogState(resJson);
+          history.push("/")
         }
       }
       );
