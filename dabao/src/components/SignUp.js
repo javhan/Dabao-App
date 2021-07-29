@@ -5,16 +5,17 @@ import Nav from "./Nav";
 const SignUp = () => {
   const [isConfirmPwdSame, setIsConfirmPwdSame] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
-
+  const [valid, setValid] = useState(false)
   // need to make sure password and confirm password is same
   // the new user API is post method with /users route
   const handleRegisterUser = (event) => {
     event.preventDefault();
+    setIsConfirmPwdSame(true);
+    setValid(false);
     if (event.target.password.value !== event.target.confirmPassword.value) {
       setIsConfirmPwdSame(false);
       return;
     }
-
     fetch("/users", {
       method: "POST",
       body: JSON.stringify({
@@ -35,14 +36,13 @@ const SignUp = () => {
         if (res.status === 200) {
           setIsSuccess(true);
           return res.json();
+        } else if (res.status === 409) {
+          setValid(true);
         }
       })
-      .then((resJson) => {
-
-      })
+      .then((resJson) => {})
       .catch((error) => console.error({ Error: error }));
   };
-
   return (
     <Nav>
       <h1>Sign Up!</h1>
@@ -79,10 +79,10 @@ const SignUp = () => {
           <button className="btstyle">Register</button>
         </form>
         {!isConfirmPwdSame && <h3>Confirm Password Must Match</h3>}
+        {valid && <h3>Username Taken!</h3>}
         {isSuccess && <Redirect to="/signupsuccess" />}
       </div>
     </Nav>
   );
 };
-
 export default SignUp;
