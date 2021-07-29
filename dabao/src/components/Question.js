@@ -1,17 +1,16 @@
-import React, { useContext,useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import Nav from "./Nav";
 import { useHistory } from "react-router-dom";
 import { LoggedContext } from "../App.js";
 import axios from "axios";
-import Option from "./Option"
-
+import Option from "./Option";
 
 const Question = () => {
   const loggedContext = useContext(LoggedContext);
   const history = useHistory();
   const handleSubmit = (event) => {
-      console.log(event.target)
-      event.preventDefault()
+    console.log(event.target);
+    event.preventDefault();
     fetch("/match", {
       method: "POST",
       body: JSON.stringify({
@@ -27,8 +26,9 @@ const Question = () => {
           itemPrice: event.target.price.value,
         },
         orderLocation: {
-             street: event.target.shopname.value, 
-             postCode: postcode.current.value},
+          street: event.target.shopname.value,
+          postCode: postcode.current.value,
+        },
       }),
       headers: {
         "Content-Type": "application/json",
@@ -40,13 +40,11 @@ const Question = () => {
     });
     history.push("/dashboard");
   };
-  const postcode = useRef(null)
-  const [info, setInfo] = useState([])
-  
-  
+  const postcode = useRef(null);
+  const [info, setInfo] = useState([]);
+
   const HandleQuery = () => {
-  
-      axios
+    axios
       .get(`/shop/${postcode.current.value}`)
       .then(function (res) {
         // handle success
@@ -58,7 +56,7 @@ const Question = () => {
       .then(function () {
         // always executed
       });
-  }
+  };
 
   return (
     <Nav>
@@ -68,54 +66,58 @@ const Question = () => {
           <fieldset>
             <legend>Food</legend>
             <div className="user-box">
-            <input type="text" name="food" required/>
-            <label>What are you eating?</label>
+              <input type="text" name="food" required />
+              <label>What are you eating?</label>
             </div>
             <div className="user-box">
-            <input type="number" name="price" min="0" step=".01" required/>
-         <label>Whats the price?</label>
-         </div> 
-         </fieldset>
-          <br />
-          <fieldset>
-            <legend>Dabao Location</legend>
-            <div className="user-box">
-            <input
-              type="text"
-              name="DBpostcode"
-              onChange={HandleQuery}
-              ref={postcode}
-              required
-            />
-            <label>Postal Code</label>
+              <input type="number" name="price" min="0" step=".01" required />
+              <label>Whats the price?</label>
             </div>
-            <legend>Select closest store or fill in your own!</legend>
-            <input type="text" list="hawker" name="shopname" className="hawker"/>
-            <datalist id="hawker">
-              <Option data={info} />
-              </datalist>
-          </fieldset>
-          <br />
-          <fieldset>
-            <legend>Pick-Up</legend>
-            <div className="user-box">
-            <input type="text" name="pickup" required/>
-            <label>Where to Pick-up?</label>
-            </div>
-            <div className="user-box">
-            <input type="text" name="postcode" required/>
-            <label>Postal Code of Pick-up?</label>
-            </div>
-            <legend>Pick-Up Time!</legend>
-            <input type="datetime-local" name="timeAtPickUp" required/>
-          </fieldset>
-          <br />
-          <fieldset>
+            <fieldset>
             <legend>No. of Orders</legend>
             <select type="range" name="maxOrders">
               <option value="1">1</option>
               <option value="2">2</option>
             </select>
+          </fieldset>
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Dabao Location</legend>
+            <div className="user-box">
+              <input
+                type="text"
+                name="DBpostcode"
+                onChange={HandleQuery}
+                ref={postcode}
+                required
+              />
+              <label>Postal Code</label>
+            </div>
+            <legend>Select closest store or fill in your own!</legend>
+            <input
+              type="text"
+              list="hawker"
+              name="shopname"
+              className="hawker"
+            />
+            <datalist id="hawker">
+              <Option data={info} />
+            </datalist>
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Pick-Up</legend>
+            <div className="user-box">
+              <input type="text" name="pickup" required />
+              <label>Where to Pick-up?</label>
+            </div>
+            <div className="user-box">
+              <input type="text" name="postcode" required />
+              <label>Postal Code of Pick-up?</label>
+            </div>
+            <legend>Pick-Up Time!</legend>
+            <input type="datetime-local" name="timeAtPickUp" required />
           </fieldset>
           <br />
           <button className="btstyle">Submit</button>
