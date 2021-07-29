@@ -9,16 +9,34 @@ const getPostcode = (lat,long, setCurrentPos) => {
     // const apiKey = "&key=" + process.env.GOOGLE_MAP_API_KEY;
     const apiKey = "&key=AIzaSyDzMoyE6vJ1ZE8TcpQeIbUSew8ShVSqmm0"
     const URL = `${baseURL}${lat},${long}${apiKey}`;
-
+    
     console.log("URL",URL)
     axios.get(URL)
     .then(function (response) {
       console.log("MAP DATA",response.data);
-      console.log("Poscode6",response.data.results[0].address_components[6]?.long_name)
-      console.log("Poscode5",response.data.results[0].address_components[5]?.long_name)
-      const postcode6 = response.data.results[0].address_components[6]?.long_name;
-      const postcode5 = response.data.results[0].address_components[5]?.long_name;
-      const postcode = postcode6 === undefined ? postcode5:postcode6
+      let postcode;
+      for(let result of response.data.results) {
+        // console.log("result",result)
+        const length = result.address_components.length
+        postcode = result.address_components[length-1].long_name
+        // console.log(postcode)
+        // postcode = "abc"
+        // console.log(parseInt(postcode))
+        // console.log(typeof(parseInt(postcode)))
+        if(!isNaN(parseInt(postcode)))
+            break;
+      }
+
+      if(isNaN(postcode))
+        postcode = "999999"
+        // const length = response.data.results[0].address_components.length
+        // const postcode = response.data.results[0].address_components[length-1].long_name
+
+    //   console.log("Poscode6",response.data.results[0].address_components[6]?.long_name)
+    //   console.log("Poscode5",response.data.results[0].address_components[5]?.long_name)
+    //   const postcode6 = response.data.results[0].address_components[6]?.long_name;
+    //   const postcode5 = response.data.results[0].address_components[5]?.long_name;
+    //   const postcode = postcode6 === undefined ? postcode5:postcode6
       setCurrentPos({lat,long,postcode})
     })
     .catch(function (error) {
