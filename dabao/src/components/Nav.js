@@ -56,8 +56,8 @@ const Nav = (props) => {
             <div className="navLeft">Welcome, {loggedContext.logState.username}! </div>
           </div>
           <div className="gps navLeft">
-            {loggedContext.currentPos && <h6>(Lat:{loggedContext?.currentPos?.lat?.toFixed(3)} Long:{loggedContext?.currentPos?.long?.toFixed(3)})</h6> }
-            <h6>{loggedContext.currentPos && loggedContext?.currentPos?.postcode}</h6>
+            {loggedContext.currentPos && <div>(Lat:{loggedContext?.currentPos?.lat?.toFixed(3)} Long:{loggedContext?.currentPos?.long?.toFixed(3)})</div> }
+            {loggedContext.currentPos && <div>Postcode: {loggedContext?.currentPos?.postcode}</div>}
           </div>
           <div className="navRight" id="hover" onClick={handleSubmit}>
             Log Out

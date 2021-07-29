@@ -15,13 +15,10 @@ import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Nav from "./Nav";
-// import { Link } from "react-router-dom";
 import axios from "axios";
 import { LoggedContext } from "../App.js";
 import moment from "moment";
 import debounce from "lodash.debounce";
-// import GetPos from '../map'
-// import InitMap from '../map.js'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -60,10 +57,9 @@ const StyledDropDownRow = withStyles((theme) => ({
 function Row(props) {
   const { index, match, matchProps } = props;
   const [open, setOpen] = React.useState(false);
-  // const classes = useRowStyles();
-  // className={classes.root}
+
   return (
-    // <React.Fragment>
+
     <ThemeProvider theme={theme}>
       <StyledTableRow key={index}>
         <TableCell component="th" scope="row">
@@ -143,25 +139,34 @@ function Row(props) {
         </TableCell>
       </StyledDropDownRow>
     </ThemeProvider>
-    // </React.Fragment>
   );
 }
 
 const CollapsibleTable = () => {
   const loggedContext = useContext(LoggedContext);
-  const [matches, setMatches] = useState(["loading"]);
+  const [matches, setMatches] = useState();
   const [toggleUpdate, settoggleUpdate] = useState(false);
+  // const [gpsUpdated, setGpsUpdated] = useState(false)
 
   // console.log("logcontext",loggedContext)
-  const addrPostcode = loggedContext?.logState?.address?.postCode;
+  const addrPostcode = loggedContext?.logState?.address?.postCode.toString();
   const gpsPostcode = loggedContext?.currentPos?.postcode;
-  console.log("addrPostcode", addrPostcode);
+  // console.log(typeof(addrPostcode))
+  // console.log(typeof(gpsPostcode))
+  // console.log("addrPostcode", addrPostcode);
+  // console.log("gpsPostcode", gpsPostcode);
+
   useEffect(() => {
     axios
       .get(`/match/postcode/${addrPostcode}`)
       .then(function (response1) {
         // handle success
-        console.log(response1.data);
+        // console.log("RES1",response1.data);
+        const str1 = addrPostcode.slice(0,2) 
+        const str2 = gpsPostcode.slice(0,2) 
+        if(str1 === str2) {
+          setMatches(response1.data)
+        } else {
         axios
           .get(`/match/postcode/${gpsPostcode}`)
           .then(function (response2) {
@@ -174,12 +179,12 @@ const CollapsibleTable = () => {
             console.log("ALL_MATCHES",allMatches);
             
             setMatches(allMatches);
-          })
+          })}
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, [addrPostcode, gpsPostcode, toggleUpdate]);
+  }, [addrPostcode, gpsPostcode, loggedContext.logState._id, toggleUpdate]);
 
 
   const debouncedSavePlus = debounce((nextValue) => handleAdd(nextValue), 500);
@@ -188,8 +193,6 @@ const CollapsibleTable = () => {
       .put(`/match/insert/${match._id}`, {
         DBEE: loggedContext.logState._id,
         isCompleted: false,
-        // remarks: "MORE RICE",
-        // dishOrdered: { itemName: "Duck Rice", itemPrice: 3.00 },
       })
       .then(function (response) {
         // handle success
@@ -219,7 +222,9 @@ const CollapsibleTable = () => {
       });
   };
 
-  if (matches[0] === "loading" || loggedContext?.currentPos?.postcode === undefined) 
+  // if (matches[0] === "loading" || loggedContext?.currentPos?.postcode === undefined) 
+  // if (matches[0] === "loading" || !gpsUpdated) 
+  if(!matches || !loggedContext?.currentPos?.postcode)
     return <h1>Loading ..... </h1>;
 
   if (matches?.length === 0) {
@@ -264,8 +269,8 @@ const CollapsibleTable = () => {
                   });
                 }
                 if (
-                  (slotsAvail === 0 && !isConfirmedOrder) ||
-                  loggedContext?.logState?._id === match.DBER._id
+                  (slotsAvail === 0 && !isConfirmedOrder) 
+                  || loggedContext?.logState?._id === match.DBER._id
                 )
                   return <></>;
 
