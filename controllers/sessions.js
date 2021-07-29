@@ -14,17 +14,16 @@ sessions.get("/", (req, res) => {
 sessions.post("/", (req, res) => {
     User.findOne({ username: req.body.username}, (err, foundUser) => {
         if (err) {
-            console.log(err)
-            res.send("oops the db had a problem")
+            // Database Problem
+            res.status(400).json({ error : err.message})
         } else if (!foundUser) {
-            res.send("Sorry, no user found")
+            res.status(409).json({ error : "User not found"})
         } else {
             if(bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser
-                console.log(req.session.currentUser)
-                res.send(foundUser)
+                res.status(200).json(foundUser)
             } else {
-                res.send("password does not match")
+                res.status(401).json({ error : "Password Does Not Match"})
             }
         }
     })

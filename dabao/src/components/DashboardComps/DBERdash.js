@@ -33,7 +33,6 @@ function DBERdash() {
       .then((res) => res.json())
       .then((data) => {
         setDashboard(data);
-        console.log("dashboard", data);
       });
   }, [loggedContext?.logState?._id, chatbox]);
 
@@ -109,7 +108,7 @@ function DBERdash() {
             <button onClick={() => handleDeleteJob(data._id)}>Delete</button>
           </td>
           <td>
-            <button onClick={() => toggleShown(data._id)}>
+            <button onClick={() => toggleShown(data._id)} disabled={(data.Orders.length === 0 ? true : false)}>
               Toggle Details
             </button>
           </td>
