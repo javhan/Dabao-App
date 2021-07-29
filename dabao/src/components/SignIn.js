@@ -25,7 +25,7 @@ const SignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const username = event.target.elements.username.value;
+    const username = (event.target.elements.username.value).toLowerCase();
     const password = event.target.elements.password.value;
     fetch("/sessions", {
       method: "POST",

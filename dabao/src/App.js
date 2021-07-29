@@ -19,9 +19,6 @@ function App() {
   const [logState, setLogState] = useState();
   const [currentPos, setCurrentPos] = useState();
 
-console.log("logState",logState)
-console.log("Pos",currentPos)
-
 const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
   return <Route {...rest} render={(props) => (
     logState !== undefined

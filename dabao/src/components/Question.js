@@ -9,7 +9,7 @@ const Question = () => {
   const loggedContext = useContext(LoggedContext);
   const history = useHistory();
   const handleSubmit = (event) => {
-    console.log(event.target);
+    console.log(event.target.timeAtPickUp.value)
     event.preventDefault();
     fetch("/match", {
       method: "POST",
@@ -117,7 +117,7 @@ const Question = () => {
               <label>Postal Code of Pick-up?</label>
             </div>
             <legend>Pick-Up Time!</legend>
-            <input type="datetime-local" name="timeAtPickUp" required />
+            <input type="datetime-local" name="timeAtPickUp"  required />
           </fieldset>
           <br />
           <button className="btstyle">Submit</button>
