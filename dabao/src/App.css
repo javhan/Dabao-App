@@ -120,7 +120,7 @@ label {
   overflow-y: auto;
   background-color: #f9c906;
   padding: 0px 0px 20px;
-
+  border-radius: 25px;
 }
 
 #greeting {
@@ -185,6 +185,7 @@ select {
 }
 .user-box {
   position: relative;
+  
 }
 
 .user-box input {
@@ -245,6 +246,7 @@ input:-webkit-autofill:active {
 fieldset {
   text-align: left;
   padding: 10px;
+  border-radius: 25px;
 }
 
 legend {
@@ -266,4 +268,8 @@ legend {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%)
+}
+
+.zero{
+  border: none;
 }

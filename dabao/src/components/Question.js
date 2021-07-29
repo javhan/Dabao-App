@@ -73,8 +73,8 @@ const Question = () => {
               <input type="number" name="price" min="0" step=".01" required />
               <label>Whats the price?</label>
             </div>
-            <fieldset>
-            <legend>No. of Orders</legend>
+            <fieldset className="zero">
+            <legend>How many orders can you take?</legend>
             <select type="range" name="maxOrders">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -94,7 +94,7 @@ const Question = () => {
               />
               <label>Postal Code</label>
             </div>
-            <legend>Select closest store or fill in your own!</legend>
+            <legend>Select closest hawker or fill in your own!</legend>
             <input
               type="text"
               list="hawker"
