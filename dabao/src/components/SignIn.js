@@ -9,7 +9,7 @@ const SignIn = () => {
 
   const setPos = () => {
     const successCallback = (position) => {
-      console.log(position);
+      // console.log(position);
       console.log(position.coords.latitude)
       console.log(position.coords.longitude)
       loggedContext.setCurrentPos({lat:position.coords.latitude, long:position.coords.longitude})
@@ -42,9 +42,7 @@ const SignIn = () => {
       })
       .then((resJson) => {
         setPos()
-        // console.log(currentPos)
         loggedContext.setLogState(resJson);
-        // loggedContext.setCurrentPos(currentPos)
         history.push("/home");
       });
   };

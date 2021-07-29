@@ -89,7 +89,7 @@ function Row(props) {
         <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
         <TableCell align="center">{match?.pickupLocation?.postCode}</TableCell>
-        <TableCell align="center">{match?.orderLocation?.name}</TableCell>
+        <TableCell align="center">{match?.orderLocation?.street}</TableCell>
         <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
         <TableCell align="center">{matchProps.slotsAvail}</TableCell>
         <TableCell align="center">{!matchProps.isConfirmedOrder && <button onClick={()=>matchProps.debouncedSavePlus(match)}>+</button>}
