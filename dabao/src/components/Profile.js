@@ -37,7 +37,7 @@ const Profile = () => {
   return (
     <Nav>
       <form onSubmit={handleSubmit} className="box">
-        <fieldset>
+        <fieldset className="zero">
           <legend>
             <h1>Update Profile</h1>
           </legend>
