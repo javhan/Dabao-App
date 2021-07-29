@@ -9,14 +9,17 @@ import Question from "./components/Question";
 import Profile from "./components/Profile";
 import SignUpSuccess from "./components/SignUpSuccess";
 import UpdateSuccess from "./components/UpdateSuccess";
-import BoardTr from "./components/BoardTr";
+import Board from "./components/Board";
 import "tailwindcss/tailwind.css"
 
 export const LoggedContext = createContext();
 
 function App() {
   const [logState, setLogState] = useState();
-console.log(logState)
+  const [currentPos, setCurrentPos] = useState();
+
+console.log("logState",logState)
+console.log("Pos",currentPos)
 
 const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
   return <Route {...rest} render={(props) => (
@@ -33,7 +36,7 @@ const PrivateRoute = ({component: Component, handleChildFunc, ...rest}) => {
     .then((data) => setLogState(data))
   }, [])
 
-  const onOff = { logState, setLogState };
+  const onOff = { logState, setLogState, currentPos, setCurrentPos };
 
 useEffect(()=> {
   fetch("/")
@@ -49,7 +52,7 @@ useEffect(()=> {
             <Route path="/new" component={SignUp} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/question" component={Question} />
-            <PrivateRoute path="/board" component={BoardTr} />
+            <PrivateRoute path="/board" component={Board} />
             <PrivateRoute path="/profile" component={Profile} />
             <Route path="/signupsuccess" component={SignUpSuccess} />
             <PrivateRoute path="/updatesuccess" component={UpdateSuccess} />

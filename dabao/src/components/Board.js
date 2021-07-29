@@ -14,13 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
 import Nav from "./Nav";
 // import { Link } from "react-router-dom";
 import axios from "axios"
 import { LoggedContext } from "../App.js";
 import moment from "moment"
 import debounce from 'lodash.debounce';
+// import InitMap from '../map.js'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {

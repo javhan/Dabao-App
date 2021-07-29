@@ -7,6 +7,21 @@ const SignIn = () => {
   const loggedContext = useContext(LoggedContext);
   let history = useHistory();
 
+  const setPos = () => {
+    const successCallback = (position) => {
+      console.log(position);
+      console.log(position.coords.latitude)
+      console.log(position.coords.longitude)
+      loggedContext.setCurrentPos({lat:position.coords.latitude, long:position.coords.longitude})
+    }
+
+    const errorCallback = (error) => {
+      console.error(error)
+    }
+    
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const username = event.target.elements.username.value;
@@ -26,7 +41,10 @@ const SignIn = () => {
         throw new Error("Error in network");
       })
       .then((resJson) => {
+        setPos()
+        // console.log(currentPos)
         loggedContext.setLogState(resJson);
+        // loggedContext.setCurrentPos(currentPos)
         history.push("/home");
       });
   };

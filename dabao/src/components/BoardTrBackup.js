@@ -5,7 +5,7 @@ import axios from "axios"
 import { LoggedContext } from "../App.js";
 import moment from "moment"
 import debounce from 'lodash.debounce';
-import CollapsibleTable from './BoardTr';
+import CollapsibleTable from './Board';
 
 const Board = () => {
   const loggedContext = useContext(LoggedContext);

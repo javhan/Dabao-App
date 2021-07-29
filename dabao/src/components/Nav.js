@@ -55,6 +55,9 @@ const Nav = (props) => {
           <div>
             <div className="navLeft">Welcome, {loggedContext.logState.username}! </div>
           </div>
+          <div>
+            {loggedContext.currentPos && <div className="navLeft">(Lat:{loggedContext?.currentPos?.lat.toFixed(3)} Long:{loggedContext?.currentPos?.long.toFixed(3)})</div> }
+          </div>
           <div className="navRight" id="hover" onClick={handleSubmit}>
             Log Out
           </div>
