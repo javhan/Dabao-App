@@ -80,9 +80,9 @@ app.get("/seedMatch", (req, res) => {
 });
 
 //Routes
-app.get("/", (req, res) => {
-  res.send("TEST FROM EXPRESS");
-});
+// app.get("/", (req, res) => {
+//   res.send("TEST FROM EXPRESS");
+// });
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build", "index.html"));
