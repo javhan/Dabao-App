@@ -111,7 +111,7 @@ li {
 .styled-table tbody {
   height: 360px;
   background-color: #f9c906;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden
 }
 

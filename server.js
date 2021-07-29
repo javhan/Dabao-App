@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -13,7 +14,7 @@ const mongodbURI = process.env.MONGODB_URI;
 //middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-app.use(express.static("./dabao/build"));
+app.use(express.static(path.join(__dirname, "./dabao/build")));
 
 app.use(cors());
 app.use(express.json());
@@ -83,9 +84,16 @@ app.get("/", (req, res) => {
   res.send("TEST FROM EXPRESS");
 });
 
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+});
+
+
+
 app.listen(PORT, () => {
   console.log("Listening on the port", PORT);
 });
+
 
 mongoose.connect(mongodbURI, {
   useNewUrlParser: true,
