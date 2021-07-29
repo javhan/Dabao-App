@@ -4,8 +4,10 @@
 
 .gps{
   display:flex;
+  float: left;
   flex-direction: column;
-  /* justify-content: flex-start; */
+  padding: 10px 0px;
+  font-size: 12px
 }
 
 
