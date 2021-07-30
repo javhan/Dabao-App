@@ -19,6 +19,7 @@ import axios from "axios";
 import { LoggedContext } from "../App.js";
 import moment from "moment";
 import debounce from "lodash.debounce";
+import MapIcon from '@material-ui/icons/Map';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -55,14 +56,28 @@ const StyledDropDownRow = withStyles((theme) => ({
 }))(TableRow);
 
 function Row(props) {
-  const { index, match, matchProps } = props;
+  const {  match, matchProps } = props;
   const [open, setOpen] = React.useState(false);
   const loggedContext = useContext(LoggedContext);
+  const [plusDisabled, setPlusDisable] = useState(false)
+  const [minusDisabled, setMinusDisable] = useState(false)
 
+  const handlePlus = () => {
+    matchProps.debouncedSavePlus(match)
+    setPlusDisable(true)
+    setMinusDisable(false)
+  }
+
+  const handleMinus = () => {
+    matchProps.debouncedSaveMinus(match)
+    setPlusDisable(false)
+    setMinusDisable(true)
+  }
+ 
   return (
 
     <ThemeProvider theme={theme}>
-      <StyledTableRow key={index}>
+      <StyledTableRow key={matchProps.index}>
         <TableCell component="th" scope="row">
           <IconButton
             aria-label="expand row"
@@ -75,19 +90,24 @@ function Row(props) {
         <TableCell>{match?.DBER?.username}</TableCell>
         <TableCell align="center">{match?.dishOrdered?.itemName}</TableCell>
         <TableCell align="center">${match?.dishOrdered?.itemPrice}</TableCell>
-        <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
-        <TableCell align="center"><a href={`https://google.com/maps/dir/${loggedContext?.currentPos?.postcode}/${match?.pickupLocation?.postCode}`} target="_blank">{match?.pickupLocation?.postCode}</a></TableCell>
         <TableCell align="center">{match?.orderLocation?.street}</TableCell>
+        <TableCell align="center">{match?.pickupLocation?.street}</TableCell>
+        <TableCell align="center">{match?.pickupLocation?.postCode}
+        <a href={`https://google.com/maps/dir/${loggedContext?.currentPos?.postcode}/${match?.pickupLocation?.postCode}`} target="_blank"><MapIcon /></a>
+        </TableCell>
+  
         <TableCell align="center">{moment(match.timeAtPickUp).format("lll")}</TableCell>
         <TableCell align="center">{matchProps.slotsAvail}</TableCell>
         <TableCell align="center">
           {!matchProps.isConfirmedOrder && (
-            <button onClick={() => matchProps.debouncedSavePlus(match)}>
+            // <button disabled={plusDisabled?true:false} onClick={() => matchProps.debouncedSavePlus(match)}>
+            <button disabled={plusDisabled?true:false} onClick={handlePlus}>
               +
             </button>
           )}
           {matchProps.isConfirmedOrder && (
-            <button onClick={() => matchProps.debouncedSaveMinus(match)}>
+            // <button disabled={minusDisabled?true:false} onClick={() => matchProps.debouncedSaveMinus(match)}>
+            <button disabled={minusDisabled?true:false} onClick={handleMinus}>
               -
             </button>
           )}
@@ -145,22 +165,16 @@ const CollapsibleTable = () => {
   const loggedContext = useContext(LoggedContext);
   const [matches, setMatches] = useState();
   const [toggleUpdate, settoggleUpdate] = useState(false);
-  // const [gpsUpdated, setGpsUpdated] = useState(false)
 
   // console.log("logcontext",loggedContext)
   const addrPostcode = loggedContext?.logState?.address?.postCode.toString();
   const gpsPostcode = loggedContext?.currentPos?.postcode;
-  // console.log(typeof(addrPostcode))
-  // console.log(typeof(gpsPostcode))
-  // console.log("addrPostcode", addrPostcode);
-  // console.log("gpsPostcode", gpsPostcode);
 
   useEffect(() => {
     axios
       .get(`/match/postcode/${addrPostcode}`)
       .then(function (response1) {
-        // handle success
-        // console.log("RES1",response1.data);
+   
         const str1 = addrPostcode.slice(0,2) 
         const str2 = gpsPostcode.slice(0,2) 
         if(str1 === str2) {
@@ -186,7 +200,7 @@ const CollapsibleTable = () => {
   }, [addrPostcode, gpsPostcode, loggedContext.logState._id, toggleUpdate]);
 
 
-  const debouncedSavePlus = debounce((nextValue) => handleAdd(nextValue), 1000);
+  const debouncedSavePlus = debounce((nextValue) => handleAdd(nextValue), 500);
   const handleAdd = (match) => {
     axios
       .put(`/match/insert/${match._id}`, {
@@ -205,7 +219,7 @@ const CollapsibleTable = () => {
 
   const debouncedSaveMinus = debounce(
     (nextValue) => handleMinus(nextValue),
-    1000
+    500
   );
   const handleMinus = (match) => {
     console.log("minus");
@@ -245,11 +259,11 @@ const CollapsibleTable = () => {
                 <StyledTableCell>Dabao-Er</StyledTableCell>
                 <StyledTableCell align="center">Dish</StyledTableCell>
                 <StyledTableCell align="center">Price($)</StyledTableCell>
+                <StyledTableCell align="center">Order-Location</StyledTableCell>
                 <StyledTableCell align="center">
                   Pickup-Location
                 </StyledTableCell>
                 <StyledTableCell align="center">Postcode</StyledTableCell>
-                <StyledTableCell align="center">Order-Location</StyledTableCell>
                 <StyledTableCell align="center">Pickup-Time</StyledTableCell>
                 <StyledTableCell align="center">Avail-Slots</StyledTableCell>
                 <StyledTableCell align="center">Action</StyledTableCell>
@@ -278,6 +292,7 @@ const CollapsibleTable = () => {
                   isConfirmedOrder,
                   debouncedSavePlus,
                   debouncedSaveMinus,
+                  index,
                 };
 
                 return (
